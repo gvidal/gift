@@ -1,0 +1,170 @@
+/* start sidebar */
+#sidebar {
+	width: 262px;
+	float: right;
+	padding: 11px 0 0;
+}
+
+#sidebar .title_wrapper {
+	padding: 0 0 4px;
+}
+#sidebar h3 {
+	font-size: 22px;
+	font-weight: normal;
+	margin: 0;
+	padding: 0;
+	color: #29323f;
+	float: left;
+}
+
+.sidebar_module .title_wrapper .view_all_orders:link, 
+.sidebar_module .title_wrapper .view_all_orders:visited, 
+.sidebar_module .title_wrapper .view_all_orders:hover, 
+.sidebar_module .title_wrapper .view_all_orders:active {
+	float: right;
+	margin: 7px 0 0;
+}
+
+
+.sidebar_module {
+	padding: 0 0 25px;
+}
+
+#statistics dl {
+	width: 100%;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	border: solid #d9d9d9;
+	border-width: 0 0 1px;
+	padding: 10px 0;
+}
+
+#statistics dt {
+	margin: 0;
+	padding: 0;
+	float: left;
+	width: 190px;
+}
+#statistics dd {
+	margin: 0;
+	padding: 0;
+	float: right;
+	font-weight: bold;
+}
+
+#secondary_menu ul {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	overflow: hidden;
+}
+#secondary_menu ul li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	list-style-position: outside;
+	border: solid #d9d9d9;
+	border-width: 0 0 1px;
+	width: 100%;
+	float: left;
+}
+
+#secondary_menu a:link, #secondary_menu a:visited, #secondary_menu a:hover, #secondary_menu a:active {
+	display: block;
+	display: inline-block;
+	padding: 5px 0 5px 13px;
+	background: asset-url("admin/sec_menu_bg.gif",image) no-repeat 3px center;
+}
+
+
+/* start gallery */
+.gallery {
+	width: 100%;
+	overflow: hidden;
+}
+
+.gallery_inner {
+	width: 270px;
+	float: left;
+}
+
+.gallery dl {
+	margin: 0;
+	padding: 7px 6px 0 0;
+	float: left;
+	width: 83px;
+}
+
+.gallery dt {
+	margin: 0 0 1px;
+	padding: 2px;
+	background: #dbdbdb;
+}
+
+
+
+.gallery dt a {
+	display: block;
+	
+}
+
+.gallery dt a img {
+	display: block;
+	border: 0;
+}
+
+.gallery dd {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	overflow: hidden;
+	background: #f1f1f1;
+}
+
+.gallery dd em {
+	float: left;
+	display: block;
+	white-space: nowrap;
+	color: #a8a8a8;
+	font-size: 9px;
+	padding: 0 0 0 5px;
+	font-style: normal;
+	line-height: 16px;
+	font-family: 'Trebuchet Ms';
+}
+
+.gallery dd ul {
+	margin: 0;
+	padding: 0;
+	float: right;
+}
+
+.gallery dd ul li {
+	float: left;
+	margin: 0;
+	padding: 0 5px 0 0;
+	list-style: none;
+}
+
+.gallery dd a:link,  .gallery dd a:visited, .gallery dd a:hover, .gallery dd a:active {
+	display: block;
+	width: 13px;
+	height: 13px;
+	overflow: hidden;
+	text-indent: -3000px;
+}
+
+.edit_product {
+	background: asset-url("admin/edit_module.gif",image) no-repeat center center;
+}
+
+.delete_product {
+	background: asset-url("admin/action4.gif",image) no-repeat center center;
+	
+}
+/* end gallery */
+
+
+/* end sidebar */
+

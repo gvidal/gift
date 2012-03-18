@@ -1,0 +1,333 @@
+.table_wrapper {
+	width: 100%;
+	margin: 0 auto;
+	font-size: 11px;
+	
+}
+
+.table_wrapper_inner {
+	border: solid #dbdbdb;
+	border-width:  0 0 0 1px;
+}
+
+.table_wrapper td, .table_wrapper th {
+	border: solid #dbdbdb;
+	border-width: 0 1px 1px 0;
+}
+
+.table_wrapper th {
+	font-weight: bold;
+	font-size: 13px;
+}
+
+.table_wrapper th a:link, .table_wrapper th a:visited, .table_wrapper th a:hover, .table_wrapper th a:active {
+	color: #1f476f;
+	display: block;
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: right center;
+	padding: 0 16px 0 0;
+}
+
+.approved {
+	display: block;
+	display: inline-block;
+	padding: 0 20px 0 0;
+	background: asset-url("admin/approved.gif",image) no-repeat right center;
+}
+
+.pending {
+	display: block;
+	display: inline-block;
+	padding: 0 20px 0 0;
+	background: asset-url("admin/pending.gif",image) no-repeat right center;
+	color: #b86464;
+}
+
+.asc {
+	background-image: asset-url("admin/asc.gif",image);
+}
+
+.desc {
+	background-image: asset-url("admin/desc.gif",image);
+}
+
+.table_wrapper td , .table_wrapper th {
+	text-align: left;
+	padding: 0 12px;
+	line-height: 26px;
+}
+
+.table_wrapper th {
+	background: #fff;
+}
+
+.table_wrapper td {
+	background: #fefefe asset-url("admin/td_bg1.gif",image) repeat-x;
+}
+
+.table_wrapper tr.second td {
+	background: #f2f2f2 asset-url("admin/td_bg2.gif",image) repeat-x;
+}
+
+.actions {
+	width: 96px;
+	overflow: hidden;
+}
+
+.actions ul {
+	margin: 0;
+	padding: 0;
+	width: 120px;
+}
+
+
+.actions ul li {
+	float: left;
+	list-style: none;
+	margin: 0;
+	padding: 0 11px 0 0;
+	list-style: none;
+}
+
+.actions ul a:link, .actions ul a:visited, .actions ul a:hover, .actions ul a:active {
+	display: block;
+	width: 14px;
+	height: 13px;
+	text-indent: -3000px;
+	overflow: hidden;
+	background-repeat: no-repeat;
+}
+
+.action1 {
+	background-image:url(layout/action1.gif);
+}
+.action2 {
+	background-image:url(layout/action2.gif);
+}
+.action3 {
+	background-image:url(layout/action3.gif);
+}
+.action4 {
+	background-image:url(layout/action4.gif);
+}
+
+
+
+
+#product_list_tabs {
+	margin: 0;
+	padding: 0 0 0 3px;
+	float: left;
+}
+
+#product_list_tabs li {
+	float: left;
+	list-style: none;
+	padding:  0 2px 0 0;
+}
+
+#product_list_tabs a:link, #product_list_tabs a:visited,  #product_list_tabs a:active {
+	font-size: 13px;
+	line-height: 26px;
+	display: block;
+	font-weight: bold;
+	float: left;
+	background: asset-url("admin/small_tabs_middle.gif",image) repeat-x;
+	color: #979797;
+	font-weight: bold;
+	
+}
+
+#product_list_tabs a:hover, #product_list_tabs a.selected:link, #product_list_tabs a.selected:visited, #product_list_tabs a.selected:active {
+	color: #000;
+	text-decoration: none;
+	background-position: 0 -26px;
+}
+
+#product_list_tabs a span {
+	display: block;
+	background: asset-url("admin/small_tabs_left.gif",image) no-repeat;
+}
+
+#product_list_tabs a.selected:link span, #product_list_tabs a.selected:visited span, #product_list_tabs a.selected:active span, #product_list_tabs a:hover span  {
+	background-position: 0 -26px;
+}
+
+#product_list_tabs a span span {
+	display: block;
+	background: asset-url("admin/small_tabs_right.gif",image) no-repeat right top;
+	padding: 0 14px;
+}
+
+#product_list_tabs a.selected:link span span, #product_list_tabs a.selected:visited span span, #product_list_tabs a.selected:active span span, #product_list_tabs a:hover span span {
+	background-position: right -26px !important;
+}
+
+#product_list_menu {
+	float: right;
+	padding: 15px 0 0;
+	
+}
+
+.update:link, .update:visited, .update:active {
+	display: inline;
+	float: left;
+	line-height: 26px;
+	font-size: 13px;
+	font-weight: bold;
+	margin-right: 5px;
+	color: #79a2cb;
+	background: asset-url("admin/update_middle.gif",image) repeat-x;
+	
+}
+
+.update:hover {
+	text-decoration: underline;
+}
+
+.update span {
+	background: asset-url("admin/update_left.gif",image) no-repeat;
+	display: block;
+
+}
+
+.update span span {
+	background: asset-url("admin/update_right.gif",image) no-repeat right top;
+	padding: 0 10px;
+	
+
+}
+
+.update em {
+	display: block;
+	background: asset-url("admin/add.gif",image) no-repeat left center;
+	font-style: normal;
+	padding: 0 0 0 19px;
+	position: relative;
+	top: 0;
+	
+}
+
+.table_wrapper td.photo, .table_wrapper th.photo {
+	padding: 0;
+	width: 75px;
+}
+
+.table_wrapper th.photo  span {
+	display: block;
+	padding: 0 0 0 12px;
+}
+
+
+.product_thumb {
+	display: block;
+	width: 75px;
+	height: 43px;
+	margin: 3px;
+	
+}
+
+.product_thumb img {
+	border: 1px solid #a3a3a3;
+	display: block;
+}
+
+.product_name:link, .product_name:visited, .product_name:hover, .product_name:active  {
+	
+	color: #366fa7;
+	line-height: normal;
+	font-weight: bold;
+	font-size: 12px;
+	display: block;
+}
+
+.move_menu a:link, .move_menu a:visited, .move_menu a:hover, .move_menu a:active {
+	display: block;
+	width: 13px;
+	height: 13px;
+	text-indent: -3000px;
+	overflow: hidden;
+	background-repeat: no-repeat;
+}
+
+.move1 {
+	background-image: asset-url("admin/move1.gif",image);
+}
+
+.move2 {
+	background-image: asset-url("admin/move2.gif",image);
+}
+
+.move3 {
+	background-image: asset-url("admin/move3.gif",image);
+}
+
+.move4 {
+	background-image: asset-url("admin/move4.gif",image);
+}
+
+
+.move_menu {
+	width: 64px;
+	overflow: hidden;
+}
+
+.move_menu ul {
+	margin: 0;
+	padding: 0;
+	float: left;
+	width: 200%;
+}
+
+.move_menu li {
+	float: left;
+	margin: 0;
+	padding: 0 2px 0 0;
+	list-style: none;
+}
+
+
+.actions_menu a:link, .actions_menu a:visited, .actions_menu a:hover, .actions_menu a:active {
+	display: block;
+	padding: 0 0 0 18px;
+	font-weight: bold;
+	font-size: 10px;
+	color: #366fa7;
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+
+.actions_menu {
+	overflow: hidden;
+	width: 120px;
+}
+
+.actions_menu ul {
+	margin: 0;
+	padding: 0;
+	float: left;
+	width: 200px;
+}
+
+
+.actions_menu li {
+	margin: 0;
+	padding: 0 10px 0 0;
+	list-style: none;
+	float: left;
+}
+
+.details {
+	background-image: asset-url("admin/action1.gif",image);
+}
+
+.edit {
+	background-image: asset-url("admin/edit_action.gif",image);
+}
+
+.delete {
+	background-image: asset-url("admin/action4.gif",image);
+}
+
+
