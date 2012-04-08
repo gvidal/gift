@@ -1,4 +1,5 @@
 Gift::Application.routes.draw do
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -41,7 +42,13 @@ Gift::Application.routes.draw do
   namespace :admin do
     match 'home' => 'home#index'
   end
-  
+  match '/auth/:provider/callback' => 'authentications#create'  
+  match 'oauth/redirect' => "oauth#redirect"
+#  devise_for :users  
+#  resources :projects  
+#  resources :tasks
+  resources :authentications  
+  root :to => 'home#index'  
   # Sample resource route within a namespace:
   #   namespace :admin do
   #     # Directs /admin/products/* to Admin::ProductsController

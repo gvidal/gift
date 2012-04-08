@@ -1,0 +1,3 @@
+class HomeController < PublicController
+  
+end
