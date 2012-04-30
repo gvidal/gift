@@ -1,0 +1,17 @@
+
+  <%= raw title_page %>
+  <%= render :partial => "admin/shared/flash_messages", :locals => {:flash => flash} %>
+  <%= raw render(:partial => "/admin/shared/index_table", 
+                 :locals => {:title => "Admin users",
+                              :new_object_url => new_admin_admin_user_url,
+                              :headers => [AdminUser.human_attribute_name(:email), AdminUser.human_attribute_name(:name)],
+                              :content => @admin_users.map{|admin_user|
+                                  OpenStruct.new(:content_methods => [admin_user.email, admin_user.full_name],
+                                                 :actions => [link_to(t('admin.edit'), edit_admin_admin_user_url(admin_user), :class => "edit"),
+                                                              link_to(t('admin.delete'), admin_admin_user_url(admin_user), :class => "delete", :method => :destroy, :confirm => t('admin.are_you_sure')) ])
+                              }}) %>
+
+<%= paginate @admin_users %>
+<% content_for :sidebar do %>
+  <%#= filters() %>
+<% end %>

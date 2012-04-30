@@ -1,0 +1,12 @@
+<% if model.errors.full_messages.present? %>
+<div class="section" style="">
+<fieldset class="error-messages">
+  <strong class="error-message-title"><%= t('admin.could_not_save') %></strong>
+  <ul>
+    <% model.errors.full_messages.each do |message| %>
+      <li><span class="system negative" style="color: black;"><%= message %></span></li>
+    <% end %>
+  </ul>
+</fieldset>
+</div>
+<% end %>

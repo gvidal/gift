@@ -1,0 +1,66 @@
+<div class="section">
+  <div class="title_wrapper">
+    <% if defined?(title)  %>
+          <h2><%= title %></h2>
+    <% end %>
+    <div id="product_list_menu">
+            <!--[if !IE]>start product list tabs<![endif]-->
+      <% if false %>
+      <ul id="product_list_tabs">
+              <li><a class="selected" href="#">
+                  <span><span>Featured</span></span></a>
+              </li>
+              <li><a href="#"><span><span>All products</span></span></a></li>
+              <li><a href="#"><span><span>Best Sellers</span></span></a></li>
+      </ul>
+      <% end %>
+            <!--[if !IE]>end product list tabs<![endif]-->
+      <%= link_to content_tag(:span, content_tag(:span, content_tag(:em, t('admin.add_new')))), new_object_url, :class => "update" %><strong></strong>
+    </div>
+  </div>
+  <!--[if !IE]>start section_inner<![endif]-->
+<div class="section_inner">
+  <div id="product_list">
+          <!--[if !IE]>start table_wrapper<![endif]-->
+    <div class="table_wrapper">
+      <div class="table_wrapper_inner">
+        <table width="100%" cellspacing="0" cellpadding="0">
+          <tbody>
+            <tr>
+                <% headers.each do |header| %>
+                  <th><%= header%> </th>
+                <% end %>
+                <th><%= t('admin.actions')%></th>
+            </tr>
+            <% content.each_with_index do |content, index| %>
+            <tr class="<%= index % 2 == 0 ? "first" : "second" %>">
+              <% content.content_methods.each do |cm| %>
+                <td><%= raw(cm) %></td>
+              <% end %>
+                <td>
+                  <div class="actions_menu">
+                    <ul>
+                      <% content.actions.each do |action|%>
+                        <li><%=raw action%></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+          <!--[if !IE]>end table_wrapper<![endif]-->
+  </div>
+</div>
+  <!--[if !IE]>end section inner<![endif]-->
+
+
+
+
+
+
+
+  </div>

@@ -1,0 +1,38 @@
+## YAML Template.
+---
+en:
+  admin:
+    delete: "Delete"
+    edit: "Edit"
+    add_new: "New"
+    could_not_save: "Could not save because of this errors"
+    are_you_sure: "Are you sure?"
+    authentication_successfull: "Successfully authenticated"
+    authentication_not_valid: "Email and login combination is not valid"
+    submit: "Submit"
+    creation_successfull: "Creation successfull"
+    creation_failed: "Creation failed"
+    views:
+      admin_users:
+        index: 
+          title: "Listing admin users"
+        new:
+          title: "New Admin user"
+    tabs:
+      main_tabs:
+        admin_users: "Admin users"
+        users: "Users"
+        products: "Products"
+      subtabs:
+        users: "Users"
+        admin_users: "Admin users"
+    admin_users:
+      index:
+        a: "aa"
+      create:
+        creation_successfull: "Admin user successfully created"
+        creation_failed: "Admin user successfully created"
+      destroy:
+        successfully_deleted: "Admin user successfully deleted"
+        could_not_be_deleted: "Admin user could not be deleted"
+        

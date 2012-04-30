@@ -6,9 +6,37 @@
     remote:        data-remote
     paginator:     the paginator that renders the pagination tags inside
 -%>
+<% if false %>
+<div class="pagination">
+        <span class="page_no">Page 1 of 217</span>
+
+        <ul class="pag_list" style="margin-left: -111px; visibility: visible;">
+                <li><a class="prev" href="#">Previous</a></li>
+                <li><a href="#">1</a></li>
+                <li><span>2</span></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>...</li>
+                <li><a href="#">217</a></li>
+                <li><a class="next" href="#">Next</a></li>
+        </ul>
+
+        <form action="#">
+                <fieldset>
+                        <label>Go to page:</label>
+                        <div class="pag_inputs">
+                                <span class="input_go"><input type="text" name=""></span>
+                                <span class="button"><input type="submit" value="" name=""></span>
+                        </div>
+                </fieldset>
+        </form>
+</div>
+<% end %>
 <%= paginator.render do -%>
-  <nav class="pagination">
-    <%= first_page_tag unless current_page.first? %>
+  <div class="pagination">
+    <span class="page_no"><%=t('views.pagination.list_pages', :total => num_pages, :page => current_page)%></span>
+    <%#= first_page_tag unless current_page.first? %>
     <%= prev_page_tag unless current_page.first? %>
     <% each_page do |page| -%>
       <% if page.left_outer? || page.right_outer? || page.inside_window? -%>
@@ -18,6 +46,7 @@
       <% end -%>
     <% end -%>
     <%= next_page_tag unless current_page.last? %>
-    <%= last_page_tag unless current_page.last? %>
-  </nav>
+    <%#= last_page_tag unless current_page.last? %>
+    </ul>
+  </div>
 <% end -%>

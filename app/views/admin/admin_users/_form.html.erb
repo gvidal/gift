@@ -1,0 +1,58 @@
+<div class="forms">
+  <% if defined?(subtitle) %>
+  <h3><%= raw(subtitle) %></h3>
+  <% end %>
+  <div class="row">
+    <%= f.label :name, AdminUser.human_attribute_name(:name) %>
+    
+    <div class="inputs">
+      <span class="input_wrapper"><%= f.text_field(:name, :class => "text") %></span>
+    </div>
+  </div>
+  <div class="row">
+    <%= f.label :surname, AdminUser.human_attribute_name(:surname) %>
+    
+    <div class="inputs">
+      <span class="input_wrapper"><%= f.text_field(:surname, :class => "text") %></span>
+    </div>
+  </div>
+  <div class="row">
+    <%= f.label :surname, AdminUser.human_attribute_name(:surname) %>
+    
+    <div class="inputs">
+      <span class="input_wrapper"><%= f.text_field(:surname, :class => "text") %></span>
+    </div>
+  </div>
+  <div class="row">
+    <%= f.label :password, AdminUser.human_attribute_name(:password) %>
+    
+    <div class="inputs">
+      <span class="input_wrapper"><%= f.password_field(:password, :class => "text") %></span>
+    </div>
+  </div>
+  <div class="row">
+    <%= f.label :password_confirmation, AdminUser.human_attribute_name(:password_confirmation) %>
+    
+    <div class="inputs">
+      <span class="input_wrapper"><%= f.password_field(:password_confirmation, :class => "text") %></span>
+    </div>
+  </div>
+  <div class="row">
+    <%= f.label :email, AdminUser.human_attribute_name(:email) %>
+    
+    <div class="inputs">
+      <span class="input_wrapper"><%= f.text_field(:email, :class => "text") %></span>
+    </div>
+  </div>
+  <% if f.object.avatar.present? %>
+  <div class="row">
+    <%= image_tag f.object.avatar.url(:small)%>
+  </div>
+  <% end %>
+  <div class="row">
+          <label><%= f.label :avatar, AdminUser.human_attribute_name(:avatars) %></label>
+          <div class="inputs">
+                  <span class="input_wrapper blank"><%= f.file_field :avatar %></span>
+          </div>
+  </div>
+</div>

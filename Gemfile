@@ -7,12 +7,14 @@ gem 'rails', '3.2.2'
 
 gem 'mysql2'
 gem 'execjs'
-
+gem 'tinymce-rails'
 gem 'therubyracer'
 gem 'jquery-ui-rails'
 gem 'rails_tokeninput'
 gem 'kaminari'
-
+gem 'bcrypt-ruby'
+gem 'meta_search'
+gem 'paperclip', :git => "git://github.com/thoughtbot/paperclip.git"
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

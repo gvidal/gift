@@ -1,0 +1,32 @@
+<div id="login_wrapper">
+  <span class="extra1"></span>
+  <div class="title_wrapper">
+          <h2>Please Login</h2>
+          <a href="#">Lost password</a>
+  </div>
+  <%= form_tag log_in_admin_users_url do  %>
+    <fielset>
+      <div class="row">
+        <%= label_tag :email %>:
+        <span class="input_wrapper"><%= text_field_tag :email, params[:email],:class => "text" %></span>
+      </div>
+      <div class="row">
+        <%= label_tag :password %>:
+        <span class="input_wrapper"><%= password_field_tag :password, nil,:class => "text" %></span>
+      </div>
+      <div class="row">
+        <div class="inputs small_inputs">
+          <span class="button blue_button unlock_button">
+              <span>
+                  <span>
+                      <em><span class="button_ico"></span>Login</em>
+                  </span>
+              </span>
+            <%= submit_tag "" %>
+          </span>
+          <%= link_to content_tag(:span, content_tag(:span,"Back to site")), root_url, :class => "button gray_button" %>
+        </div>
+      </div>
+    </fielset>
+  <% end %>
+</div>

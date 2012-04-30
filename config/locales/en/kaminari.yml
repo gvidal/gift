@@ -3,3 +3,9 @@
 
 en:
   hello: "Hello world"
+  views:
+    pagination:
+      list_pages: "Page %{page} of %{total}"
+      previous: "Previous"
+      next: "Next"
+      truncate: "..."

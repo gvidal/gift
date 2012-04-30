@@ -1,0 +1,8 @@
+## YAML Template.
+---
+en: 
+  activerecord:
+    attributes:
+      admin_user:
+        email: "Email"
+        name: "Name"

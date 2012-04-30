@@ -10,7 +10,7 @@
 	position: relative;
 	top: 0;
 	left: 0;
-	float: left;
+	float: right;
 	margin: 0 10px 0 0;
 	font-weight: bold;
 	text-decoration: none;
@@ -282,6 +282,9 @@ h3 {
 
 /* start forms and messages */
 
+fieldset .error-messages {
+background: url("/assets/admin/red_message.gif") repeat-x scroll 0 0 #E2C5C5;
+}
 
 .general_form {
 	border: solid #dbdbdb;

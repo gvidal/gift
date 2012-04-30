@@ -1,5 +1,7 @@
 Gift::Application.routes.draw do
 
+ 
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -39,9 +41,17 @@ Gift::Application.routes.draw do
   #       get 'recent', :on => :collection
   #     end
   #   end
+  match 'admin' => "admin_users#new"
+  resources :admin_users, :only => [:new, :create] do
+    post 'log_in', :on => :collection
+  end
   namespace :admin do
+    resources :home, :only=> [:index]
+    resources :admin_users
+#    match 'log_in' => "home#log_in"
     match 'home' => 'home#index'
   end
+  
   match '/auth/:provider/callback' => 'authentications#create'  
   match 'oauth/redirect' => "oauth#redirect"
 #  devise_for :users  

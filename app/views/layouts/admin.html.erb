@@ -4,6 +4,7 @@
   <title>Meta Admin - Administration Clever Panel</title>
   <%= stylesheet_link_tag    "admin/admin", :media => "all" %>
   <%= javascript_include_tag "admin/admin", "jquery.tokeninput" %>
+  <%= tinymce_assets %>
   <%= csrf_meta_tags %>
   <%#*<link href="css/meta-admin.css" type="text/css" rel="stylesheet"></link>%>
   
@@ -30,29 +31,6 @@
             <%= yield %>
           </div>
           <div id="sidebar">
-            <div class="sidebar_module">
-						<div class="title_wrapper">
-							<h3>Statistics</h3>
-						</div>
-						<div id="statistics">
-							<dl>
-								<dt>Visitors in the last 24h</dt>
-								<dd>2165</dd>
-							</dl>
-							<dl>
-								<dt>Visitors in the last 24h</dt>
-								<dd>2165</dd>
-							</dl>
-							<dl>
-								<dt>Visitors in the last 24h</dt>
-								<dd>2165</dd>
-							</dl>
-							<dl>
-								<dt>Visitors in the last 24h</dt>
-								<dd>2165</dd>
-							</dl>
-						</div>
-					</div>
             <%= yield :sidebar %>
           </div>
         </div>
