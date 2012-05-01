@@ -46,8 +46,9 @@ Gift::Application.routes.draw do
     post 'log_in', :on => :collection
   end
   namespace :admin do
-    resources :home, :only=> [:index]
-    resources :admin_users
+    resources   :home, :only=> [:index]
+    resources   :admin_users
+    ressources  :users
 #    match 'log_in' => "home#log_in"
     match 'home' => 'home#index'
   end

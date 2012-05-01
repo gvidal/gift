@@ -9,7 +9,7 @@ class AdminUser < ActiveRecord::Base
   validates :password, :presence =>  true,
                      :length => { :minimum => 6 },
                      :if => lambda{|admin_user| admin_user.new_record? || admin_user.password.present?}
-  validate :check_password_confirmation
+#  validate :check_password_confirmation
   
   def password_confirmation=(password_confirmation)
     write_attribute(:password_confirmation,password_confirmation)
@@ -18,15 +18,8 @@ class AdminUser < ActiveRecord::Base
     read_attribute(:password_confirmation)
   end
   def full_name
-    self.name.to_s + self.surname.to_s
+    [self.name.to_s, self.surname.to_s].join(" ")
   end
-  private
-  def check_password_confirmation
-    if self.password.present? && self.password != self.password_confirmation
-      self.errors.add(:password_confirmation, "and password does not match")
-    else
-      return true
-    end
-  end
+  
   
 end

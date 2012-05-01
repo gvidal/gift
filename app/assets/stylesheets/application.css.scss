@@ -11,6 +11,7 @@
  *= require_self
  *= require jquery.ui.all
  *= require token-input-facebook
+ *= require jquery-ui-timepicker-addon
 */
 @mixin rounded-corners($radius) {
   border-radius: $radius;

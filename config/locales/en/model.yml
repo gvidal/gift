@@ -6,3 +6,12 @@ en:
       admin_user:
         email: "Email"
         name: "Name"
+  time:
+    datepicker_formats:
+      default: "%d/%m/%Y %H:%M"
+    formats:
+      default: "%a, %d %b %Y %H:%M:%S %z"
+      short: "%d %b %H:%M"
+      long: "%B %d, %Y %H:%M"
+    am: "am"
+    pm: "pm"

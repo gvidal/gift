@@ -18,6 +18,8 @@ en:
           title: "Listing admin users"
         new:
           title: "New Admin user"
+        edit:
+          title: "Edit Admin user"
     tabs:
       main_tabs:
         admin_users: "Admin users"

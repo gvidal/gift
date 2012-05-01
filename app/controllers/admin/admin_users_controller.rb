@@ -23,24 +23,20 @@ class Admin::AdminUsersController < AdminController
   
   def destroy
     @admin_user = AdminUser.find(params[:id])
-    respond_to do |format|
-      if @admin_user.destroy
-        redirect_to admin_admin_users_url, :notice => t('.successfully_deleted')
-      else
-        redirect_to admin_admin_users_url, :error => t('.could_not_be_deleted')
-      end
+    if @admin_user.destroy
+      redirect_to admin_admin_users_url, :notice => t('admin.successfully_deleted')
+    else
+      redirect_to admin_admin_users_url, :error => t('admin.could_not_be_deleted')
     end
   end
   
   def update
     @admin_user = AdminUser.find(params[:id])
-    respond_to do |format|
-      if @admin_user.update_attributes(params[:admin_user])
-        redirect_to admin_admin_users_url, :notice => t('.creation_successfull')
-      else
-        flash[:error] = t('.creation_failed')
-        render "edit"
-      end
+    if @admin_user.update_attributes(params[:admin_user])
+      redirect_to admin_admin_users_url, :notice => t('admin.creation_successfull')
+    else
+      flash[:error] = t('admin.creation_failed')
+      render "edit"
     end
   end
 end

@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many :authentications, :dependent => :destroy
-  
+  datepicker_attributes :created_at
   validates :current_token, :presence => true
 #  validates :authentication_ids, :presence => true, :length => { :minimum => 1 } 
    validates :authentications, :presence =>  true

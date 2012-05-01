@@ -282,9 +282,19 @@ h3 {
 
 /* start forms and messages */
 
-fieldset .error-messages {
+fieldset.error-messages {
 background: url("/assets/admin/red_message.gif") repeat-x scroll 0 0 #E2C5C5;
+    ul{list-style: none;}
 }
+fieldset .error-message-title{
+    background: asset-url("admin/red_ico.png",image) no-repeat scroll left center transparent;
+    display: block;
+    font-size: 11px;
+    padding-bottom: 10px;
+    padding-left: 25px;
+    padding-top: 10px;
+}
+
 
 .general_form {
 	border: solid #dbdbdb;

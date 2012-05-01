@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120429165647) do
+ActiveRecord::Schema.define(:version => 20120501151528) do
 
   create_table "admin_users", :force => true do |t|
     t.string   "email"
@@ -34,11 +34,66 @@ ActiveRecord::Schema.define(:version => 20120429165647) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "option_types", :force => true do |t|
+    t.string   "name"
+    t.string   "presentation"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "option_value_variants", :force => true do |t|
+    t.integer  "option_value_id"
+    t.integer  "variant_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "option_value_variants", ["option_value_id", "variant_id"], :name => "index_option_value_variants_on_option_value_id_and_variant_id", :unique => true
+
+  create_table "option_values", :force => true do |t|
+    t.string   "name"
+    t.string   "display"
+    t.integer  "option_type_id", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "product_option_types", :force => true do |t|
+    t.integer  "option_type_id", :null => false
+    t.integer  "product_id",     :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "product_option_types", ["option_type_id", "product_id"], :name => "index_product_option_types_on_option_type_id_and_product_id", :unique => true
+
+  create_table "products", :force => true do |t|
+    t.text     "description"
+    t.string   "permalink"
+    t.datetime "avaible_on"
+    t.boolean  "is_active",   :null => false
+    t.datetime "expires_on"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "name"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "current_token"
     t.date     "birth_date"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
+
+  create_table "variants", :force => true do |t|
+    t.string   "sku",                       :null => false
+    t.string   "product_id",                :null => false
+    t.integer  "avaible",    :default => 0, :null => false
+    t.boolean  "is_master",                 :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "variants", ["product_id"], :name => "index_variants_on_product_id"
 
 end
