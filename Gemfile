@@ -4,13 +4,12 @@ gem 'rails', '3.2.2'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
+gem 'acts_as_list'
 gem 'mysql2'
 gem 'execjs'
 gem 'tinymce-rails'
 gem 'therubyracer'
 gem 'jquery-ui-rails'
-gem 'rails_tokeninput'
 gem 'kaminari'
 gem 'bcrypt-ruby'
 gem 'meta_search'

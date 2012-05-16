@@ -1,7 +1,7 @@
 class Admin::AdminUsersController < AdminController
   
   def index
-    @admin_users = AdminUser.search(params[:search]).page(params[:page]).per(1)
+    @admin_users = AdminUser.search(params[:search]).page(params[:page]).per(params[:per])
   end
   
   def edit

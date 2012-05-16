@@ -1,0 +1,27 @@
+<div class="forms">
+  <% if defined?(subtitle) %>
+  <h3><%= raw(subtitle) %></h3>
+  <% end %>
+  <div class="row">
+    <%= f.label :name, f.object.class.human_attribute_name(:name) %>
+    
+    <div class="inputs">
+      <span class="input_wrapper"><%= f.text_field(:name, :class => "text") %></span>
+    </div>
+  </div>
+  <div class="row">
+    <%= f.label :display, f.object.class.human_attribute_name(:display) %>
+    <div class="inputs">
+      <span class="input_wrapper"><%= f.text_field(:display, :class => "text") %></span>
+    </div>
+  </div>
+  <div class="row">
+    <%= f.label :option_type, f.object.class.human_attribute_name(:option_type) %>
+    <div class="inputs">
+      <span class="input_wrapper">
+        <%= token_input(f, :option_type, options = {}) %>
+        <%= f.text_field(:option_type_id, :class => "text") %>
+      </span>
+    </div>
+  </div>
+</div>

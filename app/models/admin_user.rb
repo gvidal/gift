@@ -21,5 +21,4 @@ class AdminUser < ActiveRecord::Base
     [self.name.to_s, self.surname.to_s].join(" ")
   end
   
-  
 end

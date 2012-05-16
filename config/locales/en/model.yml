@@ -2,10 +2,20 @@
 ---
 en: 
   activerecord:
+    models:
+      option_type: "Option type"
+      option_value: "Option value"
     attributes:
       admin_user:
         email: "Email"
         name: "Name"
+      option_type:
+        name: "Name"
+        presentation: "Presentation"
+      option_value:
+        name: "Name"
+        display: "Display"
+        option_type: "Option type"
   time:
     datepicker_formats:
       default: "%d/%m/%Y %H:%M"

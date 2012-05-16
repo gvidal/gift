@@ -2,3 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+div.sidebar_module {
+    div#secondary_menu{
+        ul{
+            li{
+                a.selected{
+                    &:before { 
+                       content: "<strong>"
+                    }
+                    &:after { 
+                       content: "</strong>"
+                    }
+                }
+            }
+        }
+    }
+}

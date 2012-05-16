@@ -5,3 +5,5 @@ require "active_record_extensions"
 
 # Initialize the rails application
 Gift::Application.initialize!
+
+

@@ -48,7 +48,12 @@ Gift::Application.routes.draw do
   namespace :admin do
     resources   :home, :only=> [:index]
     resources   :admin_users
-    ressources  :users
+    resources   :users
+    resources   :products
+    resources   :option_values
+    resources   :option_types do
+      resources :option_values
+    end
 #    match 'log_in' => "home#log_in"
     match 'home' => 'home#index'
   end

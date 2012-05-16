@@ -1,0 +1,14 @@
+<div class="sidebar_module">
+  <div class="title_wrapper">
+    <h3><%= defined?(title) ? title : object.model_name.human %></h3>
+  </div>
+  <div id="secondary_menu">
+    <ul>
+      <% link_collection.each do |link| %>
+        <li>
+          <%= raw link %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

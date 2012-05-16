@@ -20,13 +20,32 @@ en:
           title: "New Admin user"
         edit:
           title: "Edit Admin user"
+      option_types:
+        index: 
+          title: "Listing option types"
+        new:
+          title: "New option type"
+        edit:
+          title: "Edit option type"
+      users:
+        index: 
+          title: "Listing users"
+        new:
+          title: "New user"
+        edit:
+          title: "Edit user"
     tabs:
       main_tabs:
+        option_types: "Option types"
+        products: "Products"
         admin_users: "Admin users"
         users: "Users"
         products: "Products"
       subtabs:
+        option_types: "Option types"
+        products: "Products"
         users: "Users"
+        option_values: "Option values"
         admin_users: "Admin users"
     admin_users:
       index:
