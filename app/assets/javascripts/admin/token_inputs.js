@@ -4,7 +4,7 @@ $(document).ready(function(){
     for (i=0;i<=relation_selectors.length;i++){
         var selection = $(relation_selectors[i]);
         var limit = parseInt(selection.data('limit'));
-        if(limit <= 0 || isNaN(limit)) limit = null;
+        if(limit <= 0 || isNaN(limit) || limit == null) limit = null;
         selection.tokenInput(selection.data('href'),{
                             theme: 'facebook',
                             prePopulate: selection.data('load'),

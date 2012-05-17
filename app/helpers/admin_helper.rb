@@ -83,7 +83,7 @@ module AdminHelper
                                   :queryOtherMethods => options[:other_search_methods]})
                               
     raw form.text_field(relation_token_method, 
-                     options[:html].merge(:class => "token-input text",:data => data))
+                     options[:html].merge(:class => "token-input",:data => data))
   end
   
 end

@@ -16,11 +16,9 @@
     </div>
   </div>
   <div class="row">
-    <%= f.label :option_type, f.object.class.human_attribute_name(:option_type) %>
-    <div class="inputs">
-      <span class="input_wrapper">
-        <%= token_input(f, :option_type) %>
-      </span>
-    </div>
+      <%= f.label :option_type, f.object.class.human_attribute_name(:option_type) %>
+      <div class="inputs">
+          <%= token_input(f, :option_type) %>
+      </div>
   </div>
 </div>
