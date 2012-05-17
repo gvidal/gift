@@ -14,7 +14,9 @@ var DEFAULT_SETTINGS = {
 	// Search settings
     method: "GET",
     contentType: "json",
-    queryParam: "q",
+    queryParam: "tokens",
+    queryParamInside: null,
+    queryOtherMethods: {},
     searchDelay: 300,
     minChars: 1,
     propertyToSearch: "name",
@@ -43,8 +45,8 @@ var DEFAULT_SETTINGS = {
     idPrefix: "token-input-",
 
 	// Formatters
-    resultsFormatter: function(item){ return "<li>" + item[this.propertyToSearch]+ "</li>" },
-    tokenFormatter: function(item) { return "<li><p>" + item[this.propertyToSearch] + "</p></li>" },
+    resultsFormatter: function(item){return "<li>" + item[this.propertyToSearch]+ "</li>"},
+    tokenFormatter: function(item) {return "<li><p>" + item[this.propertyToSearch] + "</p></li>"},
 
 	// Callbacks
     onResult: null,
@@ -780,7 +782,20 @@ $.TokenList = function (input, url_or_data, settings) {
                 }
 
                 // Prepare the request
-                ajax_params.data[settings.queryParam] = query;
+                if(settings.queryParamInside && typeof(settings.queryParamInside) == "string"){
+                    ajax_params.data[settings.queryParamInside] = {};
+                    ajax_params.data[settings.queryParamInside][settings.queryParam] = query;
+                    for(key in settings.queryOtherMethods){
+                        if(!ajax_params.data[settings.queryParamInside].hasOwnProperty(key))
+                        ajax_params.data[settings.queryParamInside][key] = settings.queryOtherMethods[key];
+                    }
+                }else{
+                    ajax_params.data[settings.queryParam] = query
+                    for(key in settings.queryOtherMethods){
+                        if(!ajax_params.data.hasOwnProperty(key))
+                        ajax_params.data[key] = settings.queryOtherMethods[key];
+                    }
+                }
                 ajax_params.type = settings.method;
                 ajax_params.dataType = settings.contentType;
                 if(settings.crossDomain) {

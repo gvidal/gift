@@ -46,11 +46,15 @@ module AdminHelper
     options[:data] ||= {}
     options[:token_id] ||= :id
     options[:token_name] ||= :name
+    options[:search_method] ||= "tokens"
+    options[:wrap_word] = (options.key?(:wrap_word) ? options[:wrap_word] : "search")
+    options[:other_search_methods] ||= {}
+    options[:html] ||= {}
     case association_type
       when :has_one, :belongs_to
         limit = 1
         relation_token_method = (relation.to_s + "_token").to_sym
-        rel = f.object.send(relation)
+        rel = form.object.send(relation)
         if rel
           options[:load] ||= [:name => rel.send(options[:token_name]), 
                                       :id => rel.send(options[:token_id])]
@@ -67,16 +71,19 @@ module AdminHelper
             end  
           end
         end
-       options[:load] ||= f.object.send(relation).map{|r|
+       options[:load] ||= form.object.send(relation).map{|r|
                                                   [:id => r.send(options[:token_id]), :name => r.send(options[:token_name])]}
     end
-    options[:token_href] ||= "admin_#{relation.to_s.tableize}_url"
-    options[:data].reverse_merge({:load => options[:load],
+    options[:token_href] ||= send("admin_#{relation.to_s.tableize}_url")
+    data  = options[:data].reverse_merge({:load => options[:load],
                                   :limit => limit.to_f.nan? ? nil : limit.to_i,
-                                  :href => options[:token_href]})
-    raw f.text_field(relation_token_method, 
-                     options.merge(:class => "token-input-text",
-                                   :data => options[:data]))
+                                  :href => options[:token_href],
+                                  :queryparam => options[:search_method],
+                                  :wrapparam => options[:wrap_word],
+                                  :queryOtherMethods => options[:other_search_methods]})
+                              
+    raw form.text_field(relation_token_method, 
+                     options[:html].merge(:class => "token-input text",:data => data))
   end
   
 end

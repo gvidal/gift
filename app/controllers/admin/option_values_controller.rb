@@ -15,7 +15,7 @@ class Admin::OptionValuesController < AdminController
   end
   
   def create
-    @option_value = (@option_type.present?) ? @option_type.option_values.build(params[:option_type]) : OptionValue.new(parmas[:option_type])
+    @option_value = (@option_type.present?) ? @option_type.option_values.build(params[:option_type]) : OptionValue.new(params[:option_type])
     @option_value = @option_value.new(params[:option_type])
     if @option_value.save
       redirect_to admin_option_values_url, :notice => t('admin.creation_successfull')

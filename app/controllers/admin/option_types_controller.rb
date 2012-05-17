@@ -1,9 +1,9 @@
 class Admin::OptionTypesController < AdminController
   def index
-    @option_types = OptionType.search(params[:search]).page(params[:page]).per(params[:per])
-    format_for do |format|
-      format.hml
-      format.json{render :json => OptionType.tokens(params[:q])}
+    @option_types = OptionType.search(params[:search])
+    respond_to do |format|
+      format.html{@option_types = @option_types.page(params[:page]).per(params[:per])}
+      format.json{render :json => @option_types.to_a.map{|x| {:name => x.name, :id => x.id}}}
     end
   end
   

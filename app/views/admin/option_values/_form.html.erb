@@ -19,8 +19,7 @@
     <%= f.label :option_type, f.object.class.human_attribute_name(:option_type) %>
     <div class="inputs">
       <span class="input_wrapper">
-        <%= token_input(f, :option_type, options = {}) %>
-        <%= f.text_field(:option_type_id, :class => "text") %>
+        <%= token_input(f, :option_type) %>
       </span>
     </div>
   </div>

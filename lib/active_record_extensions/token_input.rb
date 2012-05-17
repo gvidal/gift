@@ -1,7 +1,9 @@
+# encoding: utf-8
 module ActiveRecordExtensions
   module TokenInput
     def self.included(base)
       base.extend(ClassMethods)
+      base.send(:search_methods , :tokens, :type => :string)
 #      base.send(:include,InstanceMethods)
 #      base.send(:after_initialize, :set_reader_writer_tokens)
 #      require 'ruby-debug';debugger;1
@@ -76,16 +78,27 @@ module ActiveRecordExtensions
       def tokens(query, options = {})
         raise StandardError, "query is not a string" unless query.is_a?(String) || query.blank?
         options[:limit] ||= TOKEN_INPUT_LIMIT
-        options[:restrictive_search] ||= true
+        options[:restrictive_search] ||= false
+        options[:break_in_words] ||= true
         conditions = self.text_columns.map do |column|
-          "#{self.quoted_table_name}.#{column.to_s} LIKE %?%"
+          "#{self.quoted_table_name}.#{column.to_s} REGEXP ?"
         end
         condition_array = []
-        condition_array << options[:restrictive_search] ?  conditions.join(" AND ") : conditions.join(" OR ")
+        condition_array << (options[:restrictive_search] ?  conditions.join(" AND ") : conditions.join(" OR "))
         conditions.length.times do
-          condition_array << query
+          if options[:break_in_words]
+            condition_array << query.split(" ").map{|string| ActiveRecord::Base.accent_insensitive_regexp(string)}.join("|")
+          else
+            condition_array << ActiveRecord::Base.accent_insensitive_regexp(query)
+          end
         end
         where(condition_array).limit(options[:limit])
+      end
+      def accent_insensitive_regexp(text)
+        text_aux = text.dup
+        regexps = ["(a|á|à|â|ã|A|Á|À|Â|Ã)", "(e|é|è|ê|E|É|È|Ê)", "(i|í|ì|I|Í|Ì)", "(o|ó|ò|ô|õ|O|Ó|Ò|Ô|Õ)", "(u|ú|ù|U|Ú|Ù)", "(c|ç|C|Ç)", "(ñ|Ñ)"]
+        regexps.each { |exp| text_aux.gsub! Regexp.new(exp), exp }
+        text_aux
       end
     end
   end
