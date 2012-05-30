@@ -5,14 +5,18 @@
                  :locals => {:title => OptionValue.model_name.human,
                               :new_object_url => @option_type.present? ? [:new, :admin, @option_type, :option_value] : new_admin_option_value_url,
                               :headers => [OptionValue.human_attribute_name(:name), 
-                                           OptionValue.human_attribute_name(:presentation),
+                                           OptionValue.human_attribute_name(:display),
                                            OptionValue.human_attribute_name(:option_type)],
                               :content => @option_values.map{|option_value|
                                   OpenStruct.new(:content_methods => [option_value.name, 
-                                                                      option_value.presentation, 
+                                                                      option_value.display, 
                                                                       option_value.option_type.name],
-                                                 :actions => [link_to(t('admin.edit'), edit_admin_option_value_url(option_value), :class => "edit"),
-                                                              link_to(t('admin.delete'), admin_option_value_url(option_value), :class => "delete", :method => :destroy, :confirm => t('admin.are_you_sure')) ])
+                                                 :actions => [link_to(t('admin.edit'), 
+                                                                     (@option_type) ? edit_admin_option_type_option_value_url(@option_type,option_value) : edit_admin_option_value_url(option_value),
+                                                                          :class => "edit"),
+                                                              link_to(t('admin.delete'), 
+                                                                      (@option_type) ? edit_admin_option_type_option_value_url(@option_type,option_value) : edit_admin_option_value_url(option_value), 
+                                                                          :class => "delete", :method => :destroy, :confirm => t('admin.are_you_sure')) ])
                               }}) %>
 
 <%= paginate @option_values %>

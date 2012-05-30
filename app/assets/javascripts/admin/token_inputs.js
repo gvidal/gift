@@ -11,7 +11,12 @@ $(document).ready(function(){
                             tokenLimit: limit,
                             queryParam: selection.data('queryparam') || "tokens",
                             queryParamInside: selection.data('wrapparam') || "search",
-                            queryOtherMethods: selection.data('querymethods') || {}
+                            queryOtherMethods: selection.data('querymethods') || {},
+                            onReady: function(){
+                                if(selection.attr("readonly", true)){
+                                    selection.parent(".inputs").find(".token-input-delete-token-facebook").hide();
+                                }
+                            }
                         });
     }
 });

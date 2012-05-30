@@ -11,6 +11,7 @@ class Product < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => true
   
   datepicker_attributes :avaible_on, :expires_on
+  accepts_nested_attributes_for :radcheck, :reject_if => lambda { |a| a[:value].blank? }, :allow_destroy => true
   before_save :set_permalink
   
   def self.are_active(value = true)
@@ -29,10 +30,10 @@ class Product < ActiveRecord::Base
   
   private
   def set_permalink
-    perm = self.name.try(:parameterize) || ""
+    perm = self.name.parameterize
     num = 1
     aux_perm = perm.dup
-    while(Product.find_by_permalink(perm))
+    while((self.new_record? ? Product.search.permalink_eq(perm) : Product.search.permalink_eq(perm).id_ne(self.id)).first)
       aux_perm = perm + "#{num}"
       num += 1
     end

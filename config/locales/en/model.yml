@@ -19,6 +19,10 @@ en:
   time:
     datepicker_formats:
       default: "%d/%m/%Y %H:%M"
+    datepicker_js_formats:
+      default: 
+        date: "dd-mm-yy"
+        time: "hh:mm"
     formats:
       default: "%a, %d %b %Y %H:%M:%S %z"
       short: "%d %b %H:%M"

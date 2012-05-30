@@ -1,0 +1,21 @@
+<div class="forms">
+  <% if defined?(subtitle) %>
+  <h3><%= raw(subtitle) %></h3>
+  <% end %>
+  <div class="row">
+    <%= f.label :name, f.object.class.human_attribute_name(:name) %>
+    
+    <div class="inputs">
+      <span class="input_wrapper"><%= f.text_field(:name, :class => "text") %></span>
+    </div>
+  </div>
+  <%= admin_text_field(f, :description) %>
+  <%= admin_date_time_picker(f, :avaible_on) %>
+  <%= admin_date_time_picker(f, :expires_on) %>
+  <div class="row">
+    <%= f.label :is_active, f.object.class.human_attribute_name(:is_active) %>
+    <div class="inputs">
+      <%= f.check_box(:is_active, {}, true, false) %>
+    </div>
+  </div>
+</div>

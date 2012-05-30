@@ -10,7 +10,7 @@
     </div>
   </div>
   <div class="row">
-    <%= f.label :display, f.object.class.human_attribute_name(:display) %>
+    <%= f.label :description, f.object.class.human_attribute_name(:display) %>
     <div class="inputs">
       <span class="input_wrapper"><%= f.text_field(:display, :class => "text") %></span>
     </div>
@@ -18,7 +18,7 @@
   <div class="row">
       <%= f.label :option_type, f.object.class.human_attribute_name(:option_type) %>
       <div class="inputs">
-          <%= token_input(f, :option_type) %>
+          <%= token_input(f, :option_type, html: {readonly: true}) %>
       </div>
   </div>
 </div>

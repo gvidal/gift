@@ -14,7 +14,7 @@ module ActiveRecordExtensions
           define_method "#{arg.to_s}=" do |date|
             aux_date = nil
             I18n.t('time.datepicker_formats').values.each do |format|
-              aux_date = Time.strptime(date, format) rescue nil
+              aux_date = DateTime.strptime(date, format) rescue nil
               break unless aux_date.nil?
             end
             write_attribute(arg.to_sym,aux_date || date)

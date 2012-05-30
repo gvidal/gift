@@ -18,6 +18,43 @@ module AdminHelper
       raw a
     end
   end
+  
+  def admin_text_field(form, method, options= {})
+    content_tag(:div, :class => "row") do
+      a = form.label form.object.class.human_attribute_name(method)
+      codes = ["<strong>B</strong>", "<i>i</i>", "u", "Code", "List", "List=", "[*]", "URL", "Img"]
+      a += content_tag(:div, :class => 'inputs') do
+        b = ""
+        b += content_tag(:ul, :class => "mc_menu") do
+          c = ""
+          codes.each do |code|
+            c += content_tag(:li, link_to(raw(code), "#"))
+          end
+          raw c
+        end
+        b += content_tag(:span, form.text_area(method, options),:class =>  "input_wrapper textarea_wrapper" )
+        raw b
+       end
+       raw a
+    end
+  end
+  
+  def admin_date_time_picker(form, method, options = {})
+    content_tag(:div, :class => "row") do
+      a = form.label method, form.object.class.human_attribute_name(method)
+      a += content_tag(:div, :class => "inputs") do
+        format = I18n.t(options.delete(:format) || "default",:scope => 'time.datepicker_js_formats'.split("."))
+        date_format = format[:date]
+        time_format = format[:time]
+        content_tag(:span, form.text_field(method, 
+                           options.merge(:class => "text datetimepicker", 
+                                         :data => {date_format: date_format,
+                                                   time_format: time_format})))
+      end
+      raw(a)
+    end
+  end
+  
   def head_subtitles(subtabs)
     if subtabs.map{|x| x[:controller]}.include?(params[:controller])
       content_tag(:ul) do

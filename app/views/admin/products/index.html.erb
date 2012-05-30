@@ -1,0 +1,17 @@
+
+  <%= raw title_page %>
+  <%= render :partial => "admin/shared/flash_messages", :locals => {:flash => flash} %>
+  <%= raw render(:partial => "/admin/shared/index_table", 
+                 :locals => {:title => "Products",
+                              :new_object_url => new_admin_product_url,
+                              :headers => [Product.human_attribute_name(:name), 
+                                           Product.human_attribute_name(:is_active), 
+                                           Product.human_attribute_name(:avaible_on),
+                                           Product.human_attribute_name(:expires_on)],
+                              :content => @products.map{|product|
+                                  OpenStruct.new(:content_methods => [product.name, product.is_active, product.avaible_on, product.expires_on],
+                                                 :actions => [link_to(t('admin.edit'), edit_admin_product_url(product), :class => "edit"),
+                                                              link_to(t('admin.delete'), admin_product_url(product), :class => "delete", :method => :destroy, :confirm => t('admin.are_you_sure')) ])
+                              }}) %>
+
+<%= paginate @products %>
