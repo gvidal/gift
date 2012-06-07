@@ -50,7 +50,9 @@ Gift::Application.routes.draw do
     resources   :home, :only=> [:index]
     resources   :admin_users
     resources   :users
-    resources   :products
+    resources   :products do
+      resources :variants
+    end
     resources   :option_values
     resources   :option_types do
       resources :option_values

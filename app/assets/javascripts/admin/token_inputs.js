@@ -13,7 +13,7 @@ $(document).ready(function(){
                             queryParamInside: selection.data('wrapparam') || "search",
                             queryOtherMethods: selection.data('querymethods') || {},
                             onReady: function(){
-                                if(selection.attr("readonly", true)){
+                                if(selection.attr("readonly") == "readonly"){
                                     selection.parent(".inputs").find(".token-input-delete-token-facebook").hide();
                                 }
                             }

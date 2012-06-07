@@ -37,7 +37,7 @@ class Admin::ProductsController < AdminController
   def update
     @product = Product.find(params[:id])
     if @product.update_attributes(params[:product])
-      redirect_to edit_admin_products_url(@product), :notice => t('admin.creation_successfull')
+      redirect_to edit_admin_product_url(@product), :notice => t('admin.creation_successfull')
     else
       flash[:error] = t('admin.creation_failed')
       render "edit"

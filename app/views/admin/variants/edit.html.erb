@@ -1,13 +1,12 @@
  <%= render :partial => "admin/shared/flash_messages", :locals => {:flash => flash} %>
- <%= render :partial => "admin/shared/error_messages", :locals => {:model => @option_value} %>
+ <%= render :partial => "admin/shared/error_messages", :locals => {:model => @variant} %>
 
 <div class="section">
   <div class="title_wrapper">
     <h2><%= raw(general_title) %></h2>
   </div>
   <div class="section_inner">
-    <% ovurl = (@option_type) ? admin_option_type_option_value_url(@option_type, @option_value) : admin_option_value_url(@option_value) %>
-    <%= form_for @option_value,url: ovurl, method: :put,  html: {class: "search_form general_form"} do |form|%>
+    <%= form_for @variant, :url => admin_product_variant_url(@product, @variant), :method => :put, :html=> {:class => "search_form general_form"} do |form|%>
     <fieldset>
       <%= render :partial => "form", :locals => {:f => form} %>
       <div class="row" style="">
@@ -21,7 +20,5 @@
 </div>
 
 <% content_for :sidebar  do %>
-  <%= render :partial => "admin/shared/sidebars/links", 
-             :locals => {:object => OptionType,
-                          :link_collection => [link_to(OptionValue.model_name.human, [:admin, @option_type, :option_values])]} %>
+  <%= product_sidebar(@product) %>
 <% end %>

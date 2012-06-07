@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120506131243) do
+ActiveRecord::Schema.define(:version => 20120603142724) do
 
   create_table "admin_users", :force => true do |t|
     t.string   "email"
@@ -72,10 +72,10 @@ ActiveRecord::Schema.define(:version => 20120506131243) do
     t.text     "description"
     t.string   "permalink"
     t.datetime "avaible_on"
-    t.boolean  "is_active",   :null => false
+    t.boolean  "is_active",   :default => false, :null => false
     t.datetime "expires_on"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.string   "name"
   end
 
@@ -88,11 +88,12 @@ ActiveRecord::Schema.define(:version => 20120506131243) do
 
   create_table "variants", :force => true do |t|
     t.string   "sku",                       :null => false
-    t.string   "product_id",                :null => false
+    t.integer  "product_id",                :null => false
     t.integer  "avaible",    :default => 0, :null => false
     t.boolean  "is_master",                 :null => false
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
+    t.float    "price"
   end
 
   add_index "variants", ["product_id"], :name => "index_variants_on_product_id"

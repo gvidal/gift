@@ -7,7 +7,7 @@ class Admin::OptionValuesController < AdminController
   end
   
   def edit
-    @option_value = (@option_type.present?) ? @option_types.option_values : OptionValue
+    @option_value = (@option_type.present?) ? @option_type.option_values : OptionValue
     @option_value = @option_value.find(params[:id])
   end
   

@@ -1,0 +1,19 @@
+<div class="forms">
+  <% if defined?(subtitle) %>
+  <h3><%= raw(subtitle) %></h3>
+  <% end %>
+  <div class="row">
+    <%= f.label :name, f.object.class.human_attribute_name(:name) %>
+    
+    <div class="inputs">
+      <span class="input_wrapper"><%= f.text_field(:name, :class => "text") %></span>
+    </div>
+  </div>
+  <div class="row">
+    <%= f.label :presentation, f.object.class.human_attribute_name(:presentation) %>
+    
+    <div class="inputs">
+      <span class="input_wrapper"><%= f.text_field(:presentation, :class => "text") %></span>
+    </div>
+  </div>
+</div>

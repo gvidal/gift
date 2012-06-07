@@ -4,8 +4,8 @@
   </div>
   <div id="secondary_menu">
     <ul>
-      <% link_collection.each do |link| %>
-        <li>
+      <% link_collection.each_with_index do |link, index| %>
+        <li style="<%="background-color: darkblue;" if defined?(selected) && !selected.nil? && selected == index %>">
           <%= raw link %>
         </li>
       <% end %>

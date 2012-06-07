@@ -295,6 +295,18 @@ fieldset .error-message-title{
     padding-top: 10px;
 }
 
+fieldset .subform{
+    display: block;
+    border-style: solid;
+    width: 98%;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    border:1px solid green;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
 
 .general_form {
 	border: solid #dbdbdb;

@@ -1,3 +1,4 @@
+<% unless flash.empty? -%>
 <div class="section">
   <ul class="system_messages">
     <% flash.each do |key, message| %>
@@ -6,9 +7,10 @@
         <li class="green"><span class="ico"></span><strong class="system_title"><%= message %></strong></li>
       <% when "error" %>
         <li class="red"><span class="ico"></span><strong class="system_title"><%= message %></strong></li>
-      <% when "warning" %>
+      <% when "warning", "warn" %>
         <li class="yellow"><span class="ico"></span><strong class="system_title"><%= message %></strong></li>
       <% end %>        
     <% end %>
   </ul>
 </div>
+<% end -%>

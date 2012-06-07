@@ -34,6 +34,8 @@ en:
           title: "New user"
         edit:
           title: "Edit user"
+      variants:
+        product_needs_option_type: "This product needs to have an option type"
     tabs:
       main_tabs:
         option_types: "Option types"

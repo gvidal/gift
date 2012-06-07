@@ -15,7 +15,7 @@
       </ul>
       <% end %>
             <!--[if !IE]>end product list tabs<![endif]-->
-      <%= link_to content_tag(:span, content_tag(:span, content_tag(:em, t('admin.add_new')))), new_object_url, :class => "update" %><strong></strong>
+      <%= link_to content_tag(:span, content_tag(:span, content_tag(:em, t('admin.add_new')))), new_object_url, :class => "update" if defined?(new_object_url) && !new_object_url.nil? %><strong></strong>
     </div>
   </div>
   <!--[if !IE]>start section_inner<![endif]-->

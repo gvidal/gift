@@ -2,6 +2,27 @@ module AdminHelper
   def title_page(title = nil)
     content_tag(:div, content_tag(:h2, title || general_title), :class => "title_wrapper")
   end
+  
+  
+  def product_sidebar(product)
+    selected = case params[:controller]
+    when "admin/products"
+      0
+    when "admin/variants"
+      1
+    else
+      nil
+    end
+    links = [
+      link_to(Product.model_name.human, [:edit,:admin, product]),
+      link_to(Variant.model_name.human, [:admin, product, :variants])]
+    render :partial => "admin/shared/sidebars/links", 
+             :locals => {:object => Product,
+                          :link_collection => links,
+                          :selected => selected}
+  end
+  
+  
   def head_tabs
     content_tag(:ul) do
       a = ""
@@ -46,10 +67,12 @@ module AdminHelper
         format = I18n.t(options.delete(:format) || "default",:scope => 'time.datepicker_js_formats'.split("."))
         date_format = format[:date]
         time_format = format[:time]
+        date = form.object.send(method)
+        method_value = date.nil? ? date : date.strftime(I18n.t(options.delete(:format) || "default",:scope => 'time.datepicker_formats'.split(".")))
         content_tag(:span, form.text_field(method, 
-                           options.merge(:class => "text datetimepicker", 
-                                         :data => {date_format: date_format,
-                                                   time_format: time_format})))
+                                          options.merge(:class => "text datetimepicker", :value => method_value, 
+                                                         :data => {date_format: date_format,
+                                                                   time_format: time_format})))
       end
       raw(a)
     end
@@ -109,7 +132,7 @@ module AdminHelper
           end
         end
        options[:load] ||= form.object.send(relation).map{|r|
-                                                  [:id => r.send(options[:token_id]), :name => r.send(options[:token_name])]}
+                                                  {id: r.send(options[:token_id]), name: r.send(options[:token_name])}}
     end
     options[:token_href] ||= send("admin_#{relation.to_s.tableize}_url")
     data  = options[:data].reverse_merge({:load => options[:load],
