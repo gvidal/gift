@@ -1,12 +1,12 @@
   <%= render :partial => "admin/shared/flash_messages", :locals => {:flash => flash} %>
-  <%= render :partial => "admin/shared/error_messages", :locals => {:model => @admin_user} %>
+  <%= render :partial => "admin/shared/error_messages", :locals => {:model => @variant} %>
 
 <div class="section">
   <div class="title_wrapper">
     <h2><%= raw(general_title) %></h2>
   </div>
   <div class="section_inner">
-    <%= form_for @option_type, :url => admin_option_types_url, :method => :post, :html=> {:class => "search_form general_form"} do |form|%>
+    <%= form_for @variant, :url => [:admin, @product, @variant], :method => :post, :html=> {:class => "search_form general_form", :multipart => true} do |form|%>
     <fieldset>
       <%= render :partial => "form", :locals => {:f => form} %>
       <div class="row" style="">

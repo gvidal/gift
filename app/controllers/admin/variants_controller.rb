@@ -1,11 +1,11 @@
 class Admin::VariantsController < AdminController
   
   before_filter :load_product
+  before_filter :warn_option_type_needed
   before_filter :option_type_needed, only: [:new, :create, :update, :edit]
     
   def index
     @variants = @product.variants.search(params[:search])
-    flash[:warning] = "To create variants you need to add option types to the product" if @product.option_types.blank?
     respond_to do |format|
       format.html{@variants = @variants.page(params[:page]).per(params[:per])}
       format.json{render :json => @variants.to_a.map{|x| {:name => x.name, :id => x.id}}}
@@ -15,6 +15,7 @@ class Admin::VariantsController < AdminController
   def edit
      @variant = @product.variants.find(params[:id])
   end
+  
   def new
     @variant = @product.variants.new
   end
@@ -48,9 +49,15 @@ class Admin::VariantsController < AdminController
     end
   end
   private
-  
+  def warn_option_type_needed
+    if @product.option_types.blank?
+      flash[:warn] = t('admin.views.variants.product_needs_option_type')
+    end
+  end
   def option_type_needed
-    redirect_to admin_product_variants_url, :warn => t('admin.views.variants.product_needs_option_type')
+    if @product.option_types.blank?
+      redirect_to admin_product_variants_url
+    end
   end
   def load_product
     @product = Product.find(params[:product_id])

@@ -1,10 +1,96 @@
 <!DOCTYPE html>
+<html lang="EN" dir="ltr" xml:lang="EN" xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<title>Internet Business | Style Demo</title>
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<meta content="no" http-equiv="imagetoolbar">
+<link type="text/css" href="styles/layout.css" rel="stylesheet" />
+  <%= stylesheet_link_tag    "application", "public", media: "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body id="top">
+  <%= render partial: "shared/layout/header", locals: {current_user: current_user} %>
+  <%= render partial: "shared/layout/topbar" %>
+  <%= render partial: "shared/layout/breadcrumb" %>
+<!-- ####################################################################################################### -->
+<div id="container">
+  <div class="wrapper">
+    <div id="content">
+      <%= yield %>
+    </div>
+    <div id="column">
+      <%= yield :sidebar %> 
+    </div>
+    <br class="clear">
+  </div>
+</div>
+<!-- ####################################################################################################### -->
+<div id="footer">
+  <div class="wrapper">
+    <div id="newsletter">
+      <h2>Stay In The Know !</h2>
+      <p>Please enter your email to join our mailing list</p>
+      <form method="post" action="#">
+        <fieldset>
+          <legend>News Letter</legend>
+          <input type="text" onfocus="this.value=(this.value=='Enter Email Here…')? '' : this.value ;" value="Enter Email Here…">
+          <input type="submit" value="GO" id="news_go" name="news_go">
+        </fieldset>
+      </form>
+      <p>To unsubscribe please <a href="#">click here »</a></p>
+    </div>
+    <div class="footbox">
+      <h2>Lacus interdum</h2>
+      <ul>
+        <li><a href="#">Praesent et eros</a></li>
+        <li><a href="#">Praesent et eros</a></li>
+        <li><a href="#">Lorem ipsum dolor</a></li>
+        <li><a href="#">Suspendisse in neque</a></li>
+        <li class="last"><a href="#">Praesent et eros</a></li>
+      </ul>
+    </div>
+    <div class="footbox">
+      <h2>Lacus interdum</h2>
+      <ul>
+        <li><a href="#">Praesent et eros</a></li>
+        <li><a href="#">Praesent et eros</a></li>
+        <li><a href="#">Lorem ipsum dolor</a></li>
+        <li><a href="#">Suspendisse in neque</a></li>
+        <li class="last"><a href="#">Praesent et eros</a></li>
+      </ul>
+    </div>
+    <div class="footbox">
+      <h2>Lacus interdum</h2>
+      <ul>
+        <li><a href="#">Praesent et eros</a></li>
+        <li><a href="#">Praesent et eros</a></li>
+        <li><a href="#">Lorem ipsum dolor</a></li>
+        <li><a href="#">Suspendisse in neque</a></li>
+        <li class="last"><a href="#">Praesent et eros</a></li>
+      </ul>
+    </div>
+    <br class="clear">
+  </div>
+</div>
+<!-- ####################################################################################################### -->
+<div id="copyright">
+  <div class="wrapper">
+    <p class="fl_left">Copyright &copy; 2011 - All Rights Reserved - <a href="#">Domain Name</a></p>
+    <p class="fl_right">Template by <a title="Free Website Templates" href="http://www.os-templates.com/">OS Templates</a></p>
+    <br class="clear">
+  </div>
+</div>
+
+
+</body>
+</html>
+
+<% if false %>
 <html>
 <head>
   <title>Gift</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+  
 </head>
 <body>
   <%#= link_to 'Login', Koala::Facebook::OAuth.new.url_for_oauth_code(:callback => oauth_redirect_url) %>
@@ -13,3 +99,4 @@
 
 </body>
 </html>
+<% end %>

@@ -4,6 +4,7 @@
 //= require admin/token_inputs
 //= require ckeditor/init
 //= require admin/datetimepicker
+//= require admin/variants
 
 $(document).ready(function(){
     var width = $("#content_bottom > div.inner").first().css("width");

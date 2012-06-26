@@ -1,4 +1,15 @@
 module AdminHelper
+  
+ def link_to_add_variant_image_fields(name, f)
+    association = :variant_images
+    new_object = f.object.send(association).klass.new
+    id = new_object.object_id
+    fields = f.fields_for(association, new_object, child_index: id) do |builder|
+      render("admin/variants/" + association.to_s.singularize + "_fields", f: builder)
+    end
+    link_to(name, '#', class: "add_variant_image_fields", data: {id: id, fields: fields.gsub("\n", "")})
+  end
+  
   def title_page(title = nil)
     content_tag(:div, content_tag(:h2, title || general_title), :class => "title_wrapper")
   end
@@ -144,6 +155,10 @@ module AdminHelper
                               
     raw form.text_field(relation_token_method, 
                      options[:html].merge(:class => "token-input",:data => data))
+  end
+  
+  def media_file_attachment(form, options = {})
+    
   end
   
 end

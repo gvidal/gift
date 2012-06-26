@@ -7,6 +7,6 @@ ADMIN_TABS = [OpenStruct.new(:tab => {:controller => "admin/admin_users", :actio
                                           {:controller => "admin/products", :action => "index"}])
               ]
               
-IMAGE_STYLES = { :medium => "300x300", :thumb => "100x100" }
+IMAGE_STYLES = { :medium => "300x300", :thumb => "60x60" }
 
 TOKEN_INPUT_LIMIT = 8

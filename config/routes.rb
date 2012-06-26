@@ -67,7 +67,10 @@ Gift::Application.routes.draw do
 #  resources :projects  
 #  resources :tasks
   resources :authentications  
-  root :to => 'home#index'  
+  resources :products
+#  root :to => 'home#index'
+  root :to => 'products#index'
+#  
   # Sample resource route within a namespace:
   #   namespace :admin do
   #     # Directs /admin/products/* to Admin::ProductsController

@@ -3,17 +3,31 @@
   <h3><%= raw(subtitle) %></h3>
   <% end %>
   <div class="row">
-    <%= f.label :name, f.object.class.human_attribute_name(:name) %>
+    <%= f.label :sku, f.object.class.human_attribute_name(:sku) %>
     
     <div class="inputs">
-      <span class="input_wrapper"><%= f.text_field(:name, :class => "text") %></span>
+      <span class="input_wrapper"><%= f.text_field(:sku, :class => "text") %></span>
     </div>
   </div>
   <div class="row">
-    <%= f.label :presentation, f.object.class.human_attribute_name(:presentation) %>
+    <%= f.label :avaible, f.object.class.human_attribute_name(:avaible) %>
     
     <div class="inputs">
-      <span class="input_wrapper"><%= f.text_field(:presentation, :class => "text") %></span>
+      <span class="input_wrapper"><%= f.text_field(:avaible, :class => "text") %></span>
     </div>
   </div>
+  <div class="row">
+    <%= f.label :price, f.object.class.human_attribute_name(:price) %>
+    
+    <div class="inputs">
+      <span class="input_wrapper"><%= f.text_field(:price, :class => "text") %></span>
+    </div>
+  </div>
+  <%= link_to_add_variant_image_fields "Add image", f %>
+  <fieldset class="subform" id ="variant_images">
+    <%= f.fields_for :variant_images do |variant_image| -%>
+      <legend><%= f.object.class.human_attribute_name(:variant_images) %></legend>
+      <%= render partial: "admin/variants/variant_image_fields", locals: {f: variant_image} %>
+    <% end -%>
+  </fieldset>
 </div>

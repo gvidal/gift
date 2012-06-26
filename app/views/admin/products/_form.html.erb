@@ -27,22 +27,32 @@
   <%= f.fields_for :master do |master| -%>
   <fieldset class="subform">
     <legend><%= Product.human_attribute_name(:master) %></legend>
-  <div class="row">
-    <%= master.label :sku, Variant.human_attribute_name(:sku) %>
-    <div class="inputs">
-      <span class="input_wrapper">
-        <%= master.text_field(:sku, :class => "text") %>
-      </span>
+    <div class="row">
+      <%= master.label :sku, master.object.class.human_attribute_name(:sku) %>
+      <div class="inputs">
+        <span class="input_wrapper"><%= master.text_field(:sku, :class => "text") %></span>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <%= master.label :price, Variant.human_attribute_name(:price) %>
-    <div class="inputs">
-      <span class="input_wrapper">
-        <%= master.text_field(:price, :class => "text") %>
-      </span>
+    <div class="row">
+      <%= master.label :avaible, master.object.class.human_attribute_name(:avaible) %>
+
+      <div class="inputs">
+        <span class="input_wrapper"><%= master.text_field(:avaible, :class => "text") %></span>
+      </div>
     </div>
-  </div>
+    <div class="row">
+      <%= master.label :price, master.object.class.human_attribute_name(:price) %>
+      <div class="inputs">
+        <span class="input_wrapper"><%= master.text_field(:price, :class => "text") %></span>
+      </div>
+    </div>
+    <%= link_to_add_variant_image_fields "Add image", master %>
+    <fieldset class="subform" id ="variant_images">
+      <%= master.fields_for :variant_images do |variant_image| -%>
+        <legend><%= f.object.class.human_attribute_name(:variant_images) %></legend>
+        <%= render partial: "admin/variants/variant_image_fields", locals: {f: variant_image} %>
+      <% end -%>
+    </fieldset>
   </fieldset>
   <% end -%>
 </div>

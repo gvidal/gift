@@ -4,6 +4,5 @@ class Variant < ActiveRecord::Base
   validates :price, :presence => true, :numericality => {:greater_than => 0.0}
   scope :is_master, lambda{|value| where(:is_master => value)}
   scope :active, lambda{|value| where(:is_active => value)}
-  
-  
+  media_attachment :variant_images,:image, required: true
 end

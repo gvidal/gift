@@ -13,6 +13,7 @@ class Admin::ProductsController < AdminController
   def new
     @product = Product.new
     @product.build_master
+    @product.master.variant_images.build
   end
   
   def create
