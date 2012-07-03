@@ -16,6 +16,8 @@ en:
         name: "Name"
         display: "Display"
         option_type: "Option type"
+      product:
+        inverse_of_related_products: "Has been related with: "
   time:
     datepicker_formats:
       default: "%d/%m/%Y %H:%M"

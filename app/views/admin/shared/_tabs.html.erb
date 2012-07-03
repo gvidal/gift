@@ -1,0 +1,53 @@
+<% admin_subtabs_aux =  TabStructure::TabList.new("admin/shared/subtabs")%>
+
+
+ <%   admin_subtabs_scope = ['admin','tabs','subtabs']
+    admin_users_subtabs =  %w(admin/admin_users)
+    admin_subtabs_aux.add_tab(I18n.t('admin_users',:scope => admin_subtabs_scope),{controller: "admin/admin_users"}) do |tab_info|
+      admin_users_subtabs.each do |controller|
+        tab_info.shows_on(controller: controller)
+      end
+      tab_info.highlights_on(controller: "admin/admin_users")
+    end %>
+    
+
+<%
+    product_subtabs = %w(admin/products admin/option_values admin/option_types admin/variants)
+    admin_subtabs_aux.add_tab(I18n.t('products',:scope => admin_subtabs_scope),{controller: "admin/products"}) do |tab_info|
+      product_subtabs.each do |controller|
+        tab_info.shows_on(controller: controller)
+      end
+      tab_info.highlights_on(controller: "admin/products")
+    end
+
+    admin_subtabs_aux.add_tab(I18n.t('variants',:scope => admin_subtabs_scope),{controller: "admin/variants", product_id: @product.permalink}) do |tab_info|
+      product_subtabs.each do |controller|
+        tab_info.shows_on(controller: controller)
+      end
+      tab_info.highlights_on(controller: "admin/variants")
+    end if false #disabled for the moment
+
+    admin_subtabs_aux.add_tab(I18n.t('option_types',:scope => admin_subtabs_scope),{controller: "admin/option_types"}) do |tab_info|
+      product_subtabs.each do |controller|
+        tab_info.shows_on(controller: controller)
+      end
+      tab_info.highlights_on(controller: "admin/option_types")
+    end
+
+    admin_subtabs_aux.add_tab(I18n.t('option_values',:scope => admin_subtabs_scope),{controller: "admin/option_values"}) do |tab_info|
+      product_subtabs.each do |controller|
+        tab_info.shows_on(controller: controller)
+      end
+      tab_info.highlights_on(controller: "admin/option_values")
+    end %>
+
+<ul>
+  <% tabs.each do |tab| %>
+    <li>
+      <%= show_tab(tab) %>
+      <% if tab.is_highlighted?(params) %>
+        <%= render_tabs(admin_subtabs_aux) %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

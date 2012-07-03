@@ -14,10 +14,9 @@ module ActiveRecordExtensions
         validations = {}
         if options[:required]
           self.send(:accepts_nested_attributes_for, name.to_sym, allow_destroy: true,:reject_if => proc { |attrs| attrs['asset'].blank? })
-#          validations.merge!(presence: true)
+          validations.merge!(presence: true)
         end
-        
-#        self.send(:validates, name,validations) if validations.present?
+        self.send(:validates, name,validations) if validations.present?
 #        unless options[:disable_setup_init]
 #          self.send(:after_initialize, :"setup_#{name}_asset")
 #          self.send :define_method, :"setup_#{name}_asset" do
@@ -32,3 +31,4 @@ module ActiveRecordExtensions
    end
   end
 end
+

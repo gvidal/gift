@@ -9,6 +9,16 @@ class User < ActiveRecord::Base
   before_validation :set_birth_date
   
   
+  
+  has_many :user_wishlists
+  has_many :wishlists, through: :user_wishlists
+  
+  has_many :own_wishlists, class_name: :Wishlist, foreign_key: :user_admin_id
+  
+  def all_wishlists
+    (self.wishlists + self.own_wishlists).uniq
+  end
+  
   def apply_omniauth(omniauth)
     authentications.build(:provider => omniauth['provider'],
                           :uid => omniauth['uid'],

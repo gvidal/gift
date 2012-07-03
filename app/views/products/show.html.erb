@@ -1,0 +1,25 @@
+<div id="container">
+  <div class="wrapper">
+    <div id="content">
+      <h2><%= @product.title  %></h2>
+      <%= raw @product.description %>
+      <%= add_to_wishlist(current_user, @product) %>
+    </div>
+    <div id="column">
+      <div class="holder">
+        <h2><%= Product.human_attribute_name(:related_products) %></h2>
+        <ul id="latestnews">
+          <% relateds = @product.active_total_related_products %>
+          <% relateds.each_with_index do |related_product,index| -%>
+            <li class="<%= (index == relateds.size - 1)  ? "last" : "" %>">
+              <%= image_tag related_product.master.first_image.url(:public_lateral), class: "imgl" %>
+              <p><strong><%= link_to related_product.name, product_url(related_product.permalink) %></strong></p>
+              <p><%= truncate strip_tags(related_product.description), length: 17 %></p>
+            </li>
+          <% end -%>
+        </ul>
+      </div>
+    </div>
+    <br class="clear">
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<ul>
+  <% tabs.each do |tab| %>
+    <% if tab.show?(params) %>
+    <li>
+      <%= show_tab(tab) %>
+    </li>
+    <% end %>
+  <% end %>
+</ul>

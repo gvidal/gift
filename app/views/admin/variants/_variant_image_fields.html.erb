@@ -1,15 +1,14 @@
 <div class="row">
-   <%= link_to "Remove", '#', class: "remove_variant_image_fields", style: "float: right; padding-top: 19px;" %>
+  <%= link_to "Remove", '#', class: "remove_variant_image_fields", style: "float: right; padding-top: 19px;padding-right: 14px;" %>
   <% if f.object.new_record? %>
-  <%= f.label :asset, "Image"  %>
-  <div class="inputs">
-    <span class="input_wrapper blank">
-      <%= f.file_field :asset %>
-    </span>
-  </div>
+    <%= f.label :asset, "Image"  %>
+    <div class="inputs">
+      <span class="input_wrapper blank">
+        <%= f.file_field :asset %>
+      </span>
+    </div>
   <% else %>
-    <%= image_tag f.object.asset.url, style: "width: 70px; height: 70px; padding-left: 30 px" %>
+    <%= image_tag f.object.asset.url, style: "width: 70px; height: 70px; padding-left: 30 px;" %>
   <% end %>
   <%= f.hidden_field :_destroy %>
- 
 </div>

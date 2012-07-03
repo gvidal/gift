@@ -33,6 +33,10 @@ module AdminHelper
                           :selected => selected}
   end
   
+  def show_tab(tab)
+    link_to raw("<span><span>#{tab.name}</span></span>"), url_for(tab.link), tab.options.merge(:class => tab.is_highlighted?(params) ? "selected" : nil) 
+  end
+  
   
   def head_tabs
     content_tag(:ul) do
@@ -49,6 +53,10 @@ module AdminHelper
       end
       raw a
     end
+  end
+  
+  def render_tabs(tab_info)
+    render partial: tab_info.partial, locals: tab_info.locals
   end
   
   def admin_text_field(form, method, options= {})
@@ -145,7 +153,7 @@ module AdminHelper
        options[:load] ||= form.object.send(relation).map{|r|
                                                   {id: r.send(options[:token_id]), name: r.send(options[:token_name])}}
     end
-    options[:token_href] ||= send("admin_#{relation.to_s.tableize}_url")
+    options[:token_href] ||= send("admin_#{relation.to_s.tableize}_url") 
     data  = options[:data].reverse_merge({:load => options[:load],
                                   :limit => limit.to_f.nan? ? nil : limit.to_i,
                                   :href => options[:token_href],

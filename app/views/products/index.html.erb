@@ -1,15 +1,18 @@
-<div class="content-list">
-  <ul>
-    <% @products.each do |product| %>
-      <li>
-        <h2 class="title"><%= image_tag product.variant.first_image.url(:thumb)  %>
-          <img alt="" src="images/demo/60x60.gif"><%= product.title %> </h2>
-        <p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna. Urnaultrices quis curabitur phasellentesque congue magnis vestibulum quismodo nulla et feugiat. Adipisciniapellentum leo ut consequam ris felit elit id nibh sociis malesuada.</p>
-        <p class="readmore"><a href="#">Continue Reading »</a></p>
-      </li>
-      <li>
-        <%=  %>
-      </li>
-    <% end %>
-  </ul>
+<div id="homecontent">
+  <div class="wrapper">
+    <ul>
+      <% @products.each do |product| %>
+        <li>
+          <h2 class="title"><%= image_tag product.master.first_image.url(:thumb)  %>
+            <%= product.name %> 
+          </h2>
+          <p><%= product.description %></p>
+          <p class="readmore">
+            <%= link_to "Continue Reading", product_url(product) %>
+          </p>
+        </li>
+      <% end %>
+    </ul>
+    <br class="clear" />
+  </div>
 </div>

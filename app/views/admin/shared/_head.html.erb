@@ -21,7 +21,18 @@
   <!--[if !IE]>end user details<![endif]-->
 
   <!--[if !IE]>start main menu<![endif]-->
+  <% admin_tabs_aux = TabStructure::TabList.new("admin/shared/tabs")
+      admin_tab_scope = ['admin','tabs','main_tabs']
+      admin_tabs_aux.add_tab(I18n.t('admin_users',:scope => admin_tab_scope), {controller: "admin/admin_users"}) do |tab_info|
+        tab_info.highlights_on(controller: "admin/admin_users")
+      end
+      admin_tabs_aux.add_tab(I18n.t('products',:scope => admin_tab_scope),{controller: "admin/products"}) do |tab_info|
+        tab_info.highlights_on(controller: "admin/products")
+        tab_info.highlights_on(controller: "admin/option_values")
+        tab_info.highlights_on(controller: "admin/option_types")
+        tab_info.highlights_on(controller: "admin/variants")
+      end%>
   <div id="main_menu">
-    <%= raw head_tabs %>
+    <%= render_tabs(admin_tabs_aux) %>
   </div>
   <!--[if !IE]>end main menu<![endif]-->

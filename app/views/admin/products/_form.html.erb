@@ -24,6 +24,18 @@
           <%= token_input(f, :option_types) %>
       </div>
   </div>
+  <div class="row">
+      <%= f.label :related_products, f.object.class.human_attribute_name(:related_products) %>
+      <div class="inputs">
+          <%= token_input(f, :related_products, token_href: admin_products_url) %>
+      </div>
+  </div>
+  <div class="row">
+    <%= f.label :inverse_of_related_products, f.object.class.human_attribute_name(:inverse_of_related_products) %>
+    <div class="inputs">
+      <%= token_input(f, :inverse_of_related_products, token_href: "",html: {readonly: true}) %>
+    </div>
+  </div>
   <%= f.fields_for :master do |master| -%>
   <fieldset class="subform">
     <legend><%= Product.human_attribute_name(:master) %></legend>
@@ -55,4 +67,5 @@
     </fieldset>
   </fieldset>
   <% end -%>
+  
 </div>

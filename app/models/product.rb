@@ -7,7 +7,13 @@ class Product < ActiveRecord::Base
 #  validates :is_active, presence: true
   has_many :variants, :conditions => {:is_master => false}
   has_many :variants_with_master, :class_name => "Variant", :dependent => :destroy
-
+  
+  
+  has_many :related_products_association, :dependent => :destroy, :class_name => :RelatedProduct
+  has_many :related_products, :dependent => :destroy, :through => :related_products_association, :source => :related_product
+  
+  has_many :inverse_of_related_products_association, :dependent => :destroy, :class_name => :RelatedProduct, :foreign_key => :related_product_id
+  has_many :inverse_of_related_products, :through => :inverse_of_related_products_association, :class_name => :Product, :source => :product
 #  validates :permalink, :uniqueness => true, :presence => true
   validates :name, :presence => true, :uniqueness => true
   
@@ -20,7 +26,9 @@ class Product < ActiveRecord::Base
 #  accepts_nested_attributes_for :variants, :reject_if => lambda { |a| a[:sku].blank? || a[:price].blank?}, :allow_destroy => true
   accepts_nested_attributes_for :master
   
-  attr_reader :option_types_tokens
+  
+  
+  attr_reader :option_types_tokens, :related_products_tokens, :inverse_of_related_products_tokens
   
   def self.are_active(value = true)
     table_name = self.quoted_table_name
@@ -36,9 +44,25 @@ class Product < ActiveRecord::Base
     end
   end
   
+  def active_total_related_products
+    (self.related_products + self.inverse_of_related_products).are_active.uniq
+  end
+  
   
   def option_types_tokens=(values)
     self.option_type_ids = self.class.ids_from_tokens(values)
+  end
+  
+  def related_products_tokens=(values)
+    self.related_product_ids = self.class.ids_from_tokens(values)
+  end
+  
+  def inverse_of_related_products_tokens=(values)
+    self.inverse_of_related_product_ids = self.class.ids_from_tokens(values)
+  end
+  
+  def to_param
+    self.permalink
   end
 
   

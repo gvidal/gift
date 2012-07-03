@@ -44,6 +44,7 @@ en:
         users: "Users"
         products: "Products"
       subtabs:
+        variants: "Variants"
         option_types: "Option types"
         products: "Products"
         users: "Users"

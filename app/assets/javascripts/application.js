@@ -15,3 +15,15 @@
 //= require jquery.tokeninput
 //= require jquery.ui.all
 //= require jquery-ui-timepicker-addon
+
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+      if (settings.crossDomain) return;              
+      var csrf_token = $('meta[name="csrf-token"]').attr('content');
+      var auth_token = $('meta[name="auth_token"]').attr('content');
+
+      xhr.setRequestHeader('X-CSRF-Token', csrf_token);
+      xhr.setRequestHeader('auth_token', auth_token);
+    }
+  });
+

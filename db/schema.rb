@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120603142724) do
+ActiveRecord::Schema.define(:version => 20120701170523) do
 
   create_table "admin_users", :force => true do |t|
     t.string   "email"
@@ -24,6 +24,19 @@ ActiveRecord::Schema.define(:version => 20120603142724) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+  end
+
+  create_table "assets", :force => true do |t|
+    t.string   "assetable_type"
+    t.integer  "assetable_id"
+    t.string   "type"
+    t.string   "media_type"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "asset_file_name"
+    t.string   "asset_content_type"
+    t.integer  "asset_file_size"
+    t.datetime "asset_updated_at"
   end
 
   create_table "authentications", :force => true do |t|
@@ -79,6 +92,22 @@ ActiveRecord::Schema.define(:version => 20120603142724) do
     t.string   "name"
   end
 
+  create_table "related_products", :force => true do |t|
+    t.integer  "related_product_id"
+    t.integer  "product_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  create_table "user_wishlists", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "wishlist_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "user_wishlists", ["user_id", "wishlist_id"], :name => "index_user_wishlists_on_user_id_and_wishlist_id", :unique => true
+
   create_table "users", :force => true do |t|
     t.string   "current_token"
     t.date     "birth_date"
@@ -97,5 +126,15 @@ ActiveRecord::Schema.define(:version => 20120603142724) do
   end
 
   add_index "variants", ["product_id"], :name => "index_variants_on_product_id"
+
+  create_table "wishlists", :force => true do |t|
+    t.integer  "user_admin_id"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "wishlists", ["user_admin_id"], :name => "index_wishlists_on_user_admin_id"
 
 end

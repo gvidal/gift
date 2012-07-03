@@ -14,17 +14,18 @@
   <%= render partial: "shared/layout/topbar" %>
   <%= render partial: "shared/layout/breadcrumb" %>
 <!-- ####################################################################################################### -->
-<div id="container">
-  <div class="wrapper">
-    <div id="content">
-      <%= yield %>
-    </div>
-    <div id="column">
-      <%= yield :sidebar %> 
-    </div>
-    <br class="clear">
-  </div>
-</div>
+<%= yield %>
+<%#*<div id="container">%>
+  <%#*<div class="wrapper">%>
+    <%#*<div id="content">%>
+      <%#= yield %>
+    <%#*</div>%>
+    <%#*<div id="column">%>
+      <%#= yield :sidebar %> 
+    <%#*</div>%>
+    <%#*<br class="clear">%>
+  <%#*</div>%>
+<%#*</div>%>
 <!-- ####################################################################################################### -->
 <div id="footer">
   <div class="wrapper">

@@ -8,7 +8,7 @@ class Admin::ProductsController < AdminController
   end
   
   def edit
-    @product = Product.find(params[:id])
+    @product = Product.find_by_permalink(params[:id])
   end
   def new
     @product = Product.new
@@ -27,7 +27,7 @@ class Admin::ProductsController < AdminController
   end
   
   def destroy
-    @product = Product.find(params[:id])
+    @product = Product.find_by_permalink(params[:id])
     if @product.destroy
       redirect_to admin_products_url, :notice => t('admin.successfully_deleted')
     else
@@ -36,7 +36,7 @@ class Admin::ProductsController < AdminController
   end
   
   def update
-    @product = Product.find(params[:id])
+    @product = Product.find_by_permalink(params[:id])
     if @product.update_attributes(params[:product])
       redirect_to edit_admin_product_url(@product), :notice => t('admin.creation_successfull')
     else

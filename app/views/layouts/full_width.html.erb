@@ -9,34 +9,132 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body id="top">
- <%= render partial: "shared/layout/header" %>
- <%= render partial: "shared/layout/topbar" %>
+  <%#= render partial: "shared/layout/header" %>
+ <%#= render partial: "shared/layout/topbar" %>
  <%#= render partial: "shared/layout/breadcrumb" %>
+<%#*<!-- ####################################################################################################### -->%>
+<%#= render partial: "shared/layout/featured_slide" %>
+<body id="top">
+<div id="header">
+  <div class="wrapper">
+    <div class="fl_left">
+      <h1><a href="#">Internet Business</a></h1>
+      <p>Free CSS Website Template</p>
+    </div>
+    <div class="fl_right"> <a href="#"><img alt="" src="images/demo/468x60.gif"></a> </div>
+    <br class="clear">
+  </div>
+</div>
 <!-- ####################################################################################################### -->
-<%= render partial: "shared/layout/featured_slide" %>
-
+<div id="topbar">
+  <div class="wrapper">
+    <div id="topnav">
+      <ul>
+        <li class="active"><a href="index.html">Home</a></li>
+        <li><a href="style-demo.html">Style Demo</a></li>
+        <li><a href="full-width.html">Full Width</a></li>
+        <li><a href="#">DropDown</a>
+          <ul>
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+          </ul>
+        </li>
+        <li class="last"><a href="#">A Long Link Text</a></li>
+      </ul>
+    </div>
+    <div id="search">
+      <form method="post" action="#">
+        <fieldset>
+          <legend>Site Search</legend>
+          <input type="text" onfocus="this.value=(this.value=='Search Our Website…')? '' : this.value ;" value="Search Our Website…">
+          <input type="submit" value="Search" id="go" name="go">
+        </fieldset>
+      </form>
+    </div>
+    <br class="clear">
+  </div>
+</div>
+<!-- ####################################################################################################### -->
+<div id="featured_slide">
+  <div class="wrapper">
+    <div class="featured_content">
+      <ul id="accordion" style="position: relative; overflow: hidden; width: 920px; height: 300px;">
+        <li class="current" style="position: absolute; left: 0px; z-index: 4; height: 300px; width: 476px;">
+          <div class="featured_box">
+            <h2>1. Aliquatjusto quisque nam</h2>
+            <p>Orcimagna rhoncus et a nec antesque sed temportor pellus nibh conseque. Accumstsemper wisi pretium feugiat non ut eleifendrerisque at et condisse sce. Iaculumorci congue nam mollis odio id cras orci vestique euisquet at. Donecconsectetus lacilis ac pellus nam nibh curabitur sed anterdum nectetus adipis. Pretiummagnisse antes nunc pretium convallis tincidunt non at rutrumt.</p>
+            <p class="readmore"><a href="#">Continue Reading »</a></p>
+          </div>
+          <div class="featured_tab"> <img alt="" src="images/demo/100x100.gif">
+            <p>Tabbed Navigation 1</p>
+          </div>
+        </li>
+        <li style="position: absolute; left: 111px; z-index: 3; height: 300px; width: 476px;">
+          <div class="featured_box">
+            <h2>2. Aliquatjusto quisque nam</h2>
+            <p>Duisvest lacus pellus purus temper maurisus et sodalesuada loreet sapiente et. Quissociis magnisl orci dui nulla ut antesque malesuada sed pede et. Idlacus ridiculisi nec cursus enim ac tur urnar nunc pellus pellenterdum. Necelisi aliquat curabiturpiscing semportortor sed et velit convallis quat adipiscing cursus. Rutrumeget id ipsum et sed maurisuspendimentum auctor siti.</p>
+            <p class="readmore"><a href="#">Continue Reading »</a></p>
+          </div>
+          <div class="featured_tab"><img alt="" src="images/demo/100x100.gif">
+            <p>Tabbed Navigation 2</p>
+          </div>
+        </li>
+        <li style="position: absolute; left: 222px; z-index: 2; height: 300px; width: 476px;">
+          <div class="featured_box">
+            <h2>3. Dapiensociis temper</h2>
+            <p>Pharetiumurna habitur et enim pellentesque phasellus aliquam nunc quis justo nam. Lobortororci dapibulum ac intesquet ut id sed intesque nec alique congue. Liberoaenec vest maurisus libero pede nisl ligula cursus vitae dis metus. Aeneanaccumsan orci nasce ac pulvinare enim tor quis antesque cumsan in. Justomontesque sem ac dolor iaculum dolor orci elit lacus et vestibulum.</p>
+            <p class="readmore"><a href="#">Continue Reading »</a></p>
+          </div>
+          <div class="featured_tab"><img alt="" src="images/demo/100x100.gif">
+            <p>Tabbed Navigation 3</p>
+          </div>
+        </li>
+        <li style="position: absolute; left: 333px; z-index: 1; height: 300px; width: 476px;">
+          <div class="featured_box">
+            <h2>4. Nullain convallis ris elis</h2>
+            <p>Nullamcorpervivamus nisl in sed adipit donec feugiat lor vel velit volutpat. Wisihabitur diculisi ac curabitur cursuspendreris sociis sed eger ipsum condisse laculis. Curabiturid non eu curabitae nibh por nullamcorper at nibh elis fring. Vestnibh congue praesenenatis justo et maecenasceleifend senterdum malesuada at dolor amet. Turisristibulum curabitae eros leo at interd.</p>
+            <p class="readmore"><a href="#">Continue Reading »</a></p>
+          </div>
+          <div class="featured_tab"><img alt="" src="images/demo/100x100.gif">
+            <p>Tabbed Navigation4</p>
+          </div>
+        </li>
+        <li style="position: absolute; left: 444px; z-index: 0; height: 300px; width: 476px;">
+          <div class="featured_box">
+            <h2>5. Nullain convallis ris elis</h2>
+            <p>Nullamcorpervivamus nisl in sed adipit donec feugiat lor vel velit volutpat. Wisihabitur diculisi ac curabitur cursuspendreris sociis sed eger ipsum condisse laculis. Curabiturid non eu curabitae nibh por nullamcorper at nibh elis fring. Vestnibh congue praesenenatis justo et maecenasceleifend senterdum malesuada at dolor amet. Turisristibulum curabitae eros leo at interd.</p>
+            <p class="readmore"><a href="#">Continue Reading »</a></p>
+          </div>
+          <div class="featured_tab"><img alt="" src="images/demo/100x100.gif">
+            <p>Tabbed Navigation 5</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
 <!-- ####################################################################################################### -->
 <div id="homecontent">
   <div class="wrapper">
     <ul>
       <li>
-        <h2 class="title"><img src="images/demo/60x60.gif" alt="" />Nullamlacus dui ipsum conseque loborttis</h2>
+        <h2 class="title"><img alt="" src="images/demo/60x60.gif">Nullamlacus dui ipsum conseque loborttis</h2>
         <p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna. Urnaultrices quis curabitur phasellentesque congue magnis vestibulum quismodo nulla et feugiat. Adipisciniapellentum leo ut consequam ris felit elit id nibh sociis malesuada.</p>
-        <p class="readmore"><a href="#">Continue Reading &raquo;</a></p>
+        <p class="readmore"><a href="#">Continue Reading »</a></p>
       </li>
       <li>
-        <h2 class="title"><img src="images/demo/60x60.gif" alt="" />Nullamlacus dui ipsum conseque loborttis</h2>
+        <h2 class="title"><img alt="" src="images/demo/60x60.gif">Nullamlacus dui ipsum conseque loborttis</h2>
         <p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna. Urnaultrices quis curabitur phasellentesque congue magnis vestibulum quismodo nulla et feugiat. Adipisciniapellentum leo ut consequam ris felit elit id nibh sociis malesuada.</p>
-        <p class="readmore"><a href="#">Continue Reading &raquo;</a></p>
+        <p class="readmore"><a href="#">Continue Reading »</a></p>
       </li>
       <li class="last">
-        <h2 class="title"><img src="images/demo/60x60.gif" alt="" />Nullamlacus dui ipsum conseque loborttis</h2>
+        <h2 class="title"><img alt="" src="images/demo/60x60.gif">Nullamlacus dui ipsum conseque loborttis</h2>
         <p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna. Urnaultrices quis curabitur phasellentesque congue magnis vestibulum quismodo nulla et feugiat. Adipisciniapellentum leo ut consequam ris felit elit id nibh sociis malesuada.</p>
-        <p class="readmore"><a href="#">Continue Reading &raquo;</a></p>
+        <p class="readmore"><a href="#">Continue Reading »</a></p>
       </li>
     </ul>
-    <br class="clear" />
+    <br class="clear">
   </div>
 </div>
 <!-- ####################################################################################################### -->
@@ -54,18 +152,18 @@
       <div class="holder">
         <h2>Nullamlacus loborttis</h2>
         <ul id="latestnews">
-          <li> <img class="imgl" src="images/demo/100x75.gif" alt="" />
+          <li> <img alt="" src="images/demo/100x75.gif" class="imgl">
             <p><strong><a href="#">Indonectetus facilis leo.</a></strong></p>
             <p>Nullamlacus dui ipsum cons eque loborttis non euis que morbi penas dapibulum orna. Urnaultrices quis curabitur phasellentesque.</p>
           </li>
-          <li class="last"> <img class="imgl" src="images/demo/100x75.gif" alt="" />
+          <li class="last"> <img alt="" src="images/demo/100x75.gif" class="imgl">
             <p><strong><a href="#">Indonectetus facilis leo.</a></strong></p>
             <p>Nullamlacus dui ipsum cons eque loborttis non euis que morbi penas dapibulum orna. Urnaultrices quis curabitur phasellentesque.</p>
           </li>
         </ul>
       </div>
     </div>
-    <br class="clear" />
+    <br class="clear">
   </div>
 </div>
 <!-- ####################################################################################################### -->
@@ -74,14 +172,14 @@
     <div id="newsletter">
       <h2>Stay In The Know !</h2>
       <p>Please enter your email to join our mailing list</p>
-      <form action="#" method="post">
+      <form method="post" action="#">
         <fieldset>
           <legend>News Letter</legend>
-          <input type="text" value="Enter Email Here&hellip;"  onfocus="this.value=(this.value=='Enter Email Here&hellip;')? '' : this.value ;" />
-          <input type="submit" name="news_go" id="news_go" value="GO" />
+          <input type="text" onfocus="this.value=(this.value=='Enter Email Here…')? '' : this.value ;" value="Enter Email Here…">
+          <input type="submit" value="GO" id="news_go" name="news_go">
         </fieldset>
       </form>
-      <p>To unsubscribe please <a href="#">click here &raquo;</a></p>
+      <p>To unsubscribe please <a href="#">click here »</a></p>
     </div>
     <div class="footbox">
       <h2>Lacus interdum</h2>
@@ -113,16 +211,18 @@
         <li class="last"><a href="#">Praesent et eros</a></li>
       </ul>
     </div>
-    <br class="clear" />
+    <br class="clear">
   </div>
 </div>
 <!-- ####################################################################################################### -->
 <div id="copyright">
   <div class="wrapper">
     <p class="fl_left">Copyright &copy; 2011 - All Rights Reserved - <a href="#">Domain Name</a></p>
-    <p class="fl_right">Template by <a href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
-    <br class="clear" />
+    <p class="fl_right">Template by <a title="Free Website Templates" href="http://www.os-templates.com/">OS Templates</a></p>
+    <br class="clear">
   </div>
 </div>
+
+
 </body>
 </html>
