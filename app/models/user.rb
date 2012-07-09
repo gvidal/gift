@@ -9,7 +9,6 @@ class User < ActiveRecord::Base
   before_validation :set_birth_date
   
   
-  
   has_many :user_wishlists
   has_many :wishlists, through: :user_wishlists
   
@@ -34,5 +33,10 @@ class User < ActiveRecord::Base
   def set_birth_date
 #    self.birth_date = Koala::Facebook::GraphAPI.new(self.current_token)
   end
+  
+  def graph_api
+    @graph_api ||= Koala::Facebook::GraphAPI.new(self.current_token)
+  end
+  
   
 end

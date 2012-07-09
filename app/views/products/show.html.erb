@@ -1,7 +1,7 @@
 <div id="container">
   <div class="wrapper">
     <div id="content">
-      <h2><%= @product.title  %></h2>
+      <h2><%= @product.name  %></h2>
       <%= raw @product.description %>
       <%= add_to_wishlist(current_user, @product) %>
     </div>

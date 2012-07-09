@@ -1,20 +1,17 @@
+<% topnav_tabs = TabStructure::TabList.new("shared/layout/topbar_tabs")
+      tab_scope = ['public','tabs','main_tabs']
+      topnav_tabs.add_tab(I18n.t('home',:scope => tab_scope), {controller: "products"}) do |tab_info|
+        tab_info.highlights_on(controller: "products", action: "index")
+      end
+      topnav_tabs.add_tab(I18n.t('wishlists',:scope => tab_scope),{controller: "wishlists"}) do |tab_info|
+        tab_info.highlights_on(controller: "wishlists")
+      end if current_user
+%>
+
 <div id="topbar">
   <div class="wrapper">
     <div id="topnav">
-      <ul>
-        <% [[t('application.home'), "/"]] %>
-        <li><%= link_to , admin_ %></a></li>
-        <li class="active"><a href="style-demo.html">Style Demo</a></li>
-        <li><a href="full-width.html">Full Width</a></li>
-        <li><a href="#">DropDown</a>
-          <ul>
-            <li><a href="#">Link 1</a></li>
-            <li><a href="#">Link 2</a></li>
-            <li><a href="#">Link 3</a></li>
-          </ul>
-        </li>
-        <li class="last"><a href="#">A Long Link Text</a></li>
-      </ul>
+      <%= render topnav_tabs.to_render %>
     </div>
     <div id="search">
       <form method="post" action="#">

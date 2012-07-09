@@ -1,0 +1,11 @@
+en:
+  public:
+    wishlists:
+      index:
+        title: "My Gifts"
+    tabs:
+      main_tabs:
+        home: "Home"
+        wishlists: "My Wishlists"
+        
+      

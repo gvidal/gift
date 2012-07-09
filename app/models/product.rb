@@ -45,7 +45,7 @@ class Product < ActiveRecord::Base
   end
   
   def active_total_related_products
-    (self.related_products + self.inverse_of_related_products).are_active.uniq
+    (self.related_products.are_active + self.inverse_of_related_products.are_active).uniq
   end
   
   

@@ -1,0 +1,13 @@
+<div id="comments">
+  <h2><%= t('public.wishlists.index.title') %></h2>
+  <ul class="commentlist">
+    <% @wishlists.each_with_index do |wishlist,index| -%>
+      <% is_last = (index == @wishlists.size - 1)  %>
+      <li class="<%= is_last ? "comment_odd" : "comment_even" %>">
+        <div class="author"> <%= wishlist.title %>. By <%= image_tag wishlist.user_admin.graph_api.get_connections("me", "picture") %></div>
+        <div class="submitdate"></div>
+        <p><%= wishlist.description %> </p>
+      </li>
+    <% end -%>
+  </ul>
+</div>

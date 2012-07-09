@@ -1,0 +1,9 @@
+<ul>
+  <% tabs.each_with_index do |tab, index| %>
+    <% last = (index == (tabs.size - 1)) ? "last" : "" %>
+    <% active = (tab.is_highlighted?(params) ? "active" : "") %>
+    <li class="<%= [last, active].join(" ") %>">
+      <%= link_to tab.name, url_for(tab.link), tab.options %>
+    </li>
+  <% end %>
+</ul>
