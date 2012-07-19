@@ -15,6 +15,8 @@
 //= require jquery.tokeninput
 //= require jquery.ui.all
 //= require jquery-ui-timepicker-addon
+//= require jquery.multiselect.min
+//= require jquery.jcarousel
 
 $.ajaxSetup({
     beforeSend: function(xhr, settings) {

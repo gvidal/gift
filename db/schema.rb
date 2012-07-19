@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120701170523) do
+ActiveRecord::Schema.define(:version => 20120710163947) do
 
   create_table "admin_users", :force => true do |t|
     t.string   "email"
@@ -131,8 +131,10 @@ ActiveRecord::Schema.define(:version => 20120701170523) do
     t.integer  "user_admin_id"
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.boolean  "active",                    :default => true, :null => false
+    t.string   "gift_receiver_facebook_id"
   end
 
   add_index "wishlists", ["user_admin_id"], :name => "index_wishlists_on_user_admin_id"

@@ -68,6 +68,7 @@ Gift::Application.routes.draw do
 #  resources :tasks
   resources :authentications  
   resources :products
+  resources :wishlists
 #  root :to => 'home#index'
   root :to => 'products#index'
 #  

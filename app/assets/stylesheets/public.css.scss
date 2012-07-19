@@ -10,4 +10,19 @@
  *
  *= require_self
  *= require layout
+ *= require select2
+ *= require products
 */
+#container{
+    .wrapper{
+        .container-list{
+            list-style: none;
+            img{float:left;}
+            h1.main-list{border-bottom: medium none; float:right;padding-left: 10px;}
+            p{float:left;}
+            li{border-bottom: 1px dotted #CCCCCC; padding-bottom: 19px; word-wrap: break-word;overflow: hidden;}
+            .description-text{float:right;}
+            .title-list{float:left;}
+        }
+    }
+}

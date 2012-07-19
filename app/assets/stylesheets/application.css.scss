@@ -12,6 +12,7 @@
  *= require jquery.ui.all
  *= require token-input-facebook
  *= require jquery-ui-timepicker-addon
+ *= require jquery.multiselect
 */
 @mixin rounded-corners($radius) {
   border-radius: $radius;

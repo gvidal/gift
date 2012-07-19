@@ -23,6 +23,10 @@ module TabStructure
     def locals
       @other_locals.merge({tabs: @tabs})
     end
+    
+    def to_render
+      {partial: @partial_to_render, locals: self.locals}
+    end
   end
   class TabInfo
     attr_reader :link, :name, :options
@@ -43,16 +47,24 @@ module TabStructure
       @highlighteds << (link.kind_of?(Hash) ? link : {controller: link})
     end
     
+    def is_hidden(true_or_false)
+      @is_hidden = true_or_false
+    end
+    
     def show?(params)
-      has_some_of_the_key_values(@shows_on,params)
+      if @is_hidden
+        @is_hidden
+      else
+        has_all_the_key_values(@shows_on,params)
+      end
     end
     
     def is_highlighted?(params)
-      has_some_of_the_key_values(@highlighteds,params)
+      has_all_the_key_values(@highlighteds,params)
     end
     
     private
-    def has_some_of_the_key_values(array, hash2)
+    def has_all_the_key_values(array, hash2)
       has_some = false
       array.each do |hash1|
         has_some = has_some || hash1.to_a.inject(true) do |result, element|

@@ -5,7 +5,14 @@ en:
     models:
       option_type: "Option type"
       option_value: "Option value"
+      wishlist: "Wishlist"
     attributes:
+      wishlist:
+        users: "Friends"
+        name: "Name"
+        description: "Description"
+        gift_receiver_facebook_id: "Who receives the gift"
+        gift_receiver_facebook: "Who receives the gift"
       admin_user:
         email: "Email"
         name: "Name"

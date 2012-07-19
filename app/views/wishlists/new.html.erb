@@ -1,0 +1,53 @@
+<div id="container">
+  <div class="wrapper">
+    <div id="respond">
+      <%= form_for @wishlist, url: [:wishlists], method: :post do |f| %>
+        <p>
+          <%= f.select :gift_receiver_facebook_id, @friends.sort{|a,b| a["name"] <=> b["name"]}.map{|friend|[friend["name"], friend["id"]]}, :include_blank => "" %>
+          <%= f.label(:gift_receiver_facebook_id,content_tag(:small, Wishlist.human_attribute_name(:gift_receiver_facebook_id))) %>
+        </p>
+        <p>
+          <%= f.text_field :name %>
+          <%= f.label :name,content_tag(:small, Wishlist.human_attribute_name(:name)) %>
+        </p>
+        <p>
+          <%= f.select :user_ids, 
+                        @registered_friends.map{|friend|[friend.graph_api.get_object("me")["name"], friend.id]},
+                        { :prompt => "Please select",:include_blank => ""},
+                        { :multiple => true } %>
+          <%= f.label :user_ids,content_tag(:small, Wishlist.human_attribute_name(:users)) %>
+        </p>
+        <p>
+          <%= f.label :description,content_tag(:small, Wishlist.human_attribute_name(:description)) %>
+          <%= f.text_area :description, :cols => "100%" %>
+        </p>
+        <p>
+          <%= f.submit "Create Wishlist", id: :submit, name: :submit %>
+          &nbsp;
+          <%#*<input type="reset" value="Reset Form" tabindex="5" id="reset" name="reset">%>
+        </p>
+      <% end %>
+    </div>
+  </div>
+  <div id="column">
+    <div id="featured">
+      <ul>
+        <% @random_products.each do |product| -%>
+          <li>
+            <h2><%= product.name %></h2>
+            <p class="imgholder">
+              <%= image_tag product.master.first_image.url(:featured) %>
+            </p>
+            <p>
+              <%= raw product.description %>
+            </p>
+            <p class="readmore">
+              <%= link_to "Maybe I'm interested!", [product] %>
+              <a href="#">Continue Reading »</a>
+            </p>
+          </li>
+        <% end -%>
+      </ul>
+    </div>
+  </div>
+</div>

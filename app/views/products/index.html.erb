@@ -1,7 +1,7 @@
 <div id="homecontent">
   <div class="wrapper">
     <ul>
-      <% @products.each do |product| %>
+      <% @products.each do |product| -%>
         <li>
           <h2 class="title"><%= image_tag product.master.first_image.url(:thumb)  %>
             <%= product.name %> 
@@ -11,7 +11,7 @@
             <%= link_to "Continue Reading", product_url(product) %>
           </p>
         </li>
-      <% end %>
+      <% end -%>
     </ul>
     <br class="clear" />
   </div>

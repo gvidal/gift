@@ -12,15 +12,15 @@ class AuthenticationsController < PublicController
     if authentication
       authentication.user.set_current_token(omniauth)
       authentication.save
-      redirect_to :back, :notice => "Logged in successfully"
+      redirect_to (request.referer.blank? ? root_url : :back), :notice => "Logged in successfully"
     else  
       user = User.new
       user.set_current_token(omniauth)
       user.apply_omniauth(omniauth)
       if user.save
-        redirect :back, :notice => "Logged in successfully"
+        redirect_to (request.referer.blank? ? root_url : :back), :notice => "Logged in successfully"
       else  
-        redirect :back, :error => "Logged in error"
+        redirect_to (request.referer.blank? ? root_url : :back), :error => "Logged in error"
       end
     end
   end  

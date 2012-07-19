@@ -1,6 +1,8 @@
 en:
   public:
+    may_be_interested: "Products that you may be interested"
     wishlists:
+      successfully_created: "Wishlist successfully created"
       index:
         title: "My Gifts"
     tabs:
