@@ -3,6 +3,8 @@ class Wishlist < ActiveRecord::Base
   has_many :user_wishlists
   has_many :users, through: :user_wishlists
   belongs_to :gift_receiver_facebook, class_name: "Authentication", foreign_key: :uid, conditions: {provider: "facebook"}
+  has_many :wishlist_variants, dependent: :destroy
+  has_many :variants, through: :wishlist_variants
   
   scope :active, lambda{|value = true| where(active: value)}
   

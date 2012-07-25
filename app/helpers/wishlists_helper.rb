@@ -1,6 +1,11 @@
 module WishlistsHelper
-  def add_to_wishlist(current_user, product)
-#    return "" if !current_user || current_user.active_wishlists.size == 0
-    select_tag "wishlist_product_#{product.id}", options_from_collection_for_select(current_user.active_wishlists, "id", "name"),multiple: true, class: :add_to_wishlist
+  def add_to_wishlist(current_user, variant)
+    wishlists = current_user.active_wishlists
+    selecteds = wishlists.select{|wishlist| 
+                wishlist.wishlist_variants.find_by_variant_id(variant.id)}.map(&:id)
+    options = options_for_select(wishlists.map{|w| [w.name, w.id] }, selecteds)
+    select_tag  "add_variant_to_wishlist", 
+                options,multiple: true, 
+                :class => :add_to_wishlist, :data => {variantid: variant.id}
   end
 end

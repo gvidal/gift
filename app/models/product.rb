@@ -30,6 +30,10 @@ class Product < ActiveRecord::Base
   
   attr_reader :option_types_tokens, :related_products_tokens, :inverse_of_related_products_tokens
   
+  def is_active?
+    (self.avaible_on.blank? || self.avaible_on >= Time.zone.now) && (self.expires_on.blank? || self.expires_on <= Time.zone.now) && self.is_active
+  end
+  
   def self.are_active(value = true)
     table_name = self.quoted_table_name
     if value

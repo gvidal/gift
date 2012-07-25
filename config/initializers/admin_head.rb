@@ -61,6 +61,11 @@ require 'ostruct'
 #
 #ADMIN_SUBTABS = admin_subtabs_aux
               
-IMAGE_STYLES = { :medium => "300x300", :thumb => "60x60", :public_lateral => "100x75", :featured => "240x90"}
+IMAGE_STYLES = { :medium => "300x300", 
+                :thumb => "60x60", 
+                :public_lateral => "100x75", 
+                :featured => "240x90",
+                :carousel => "240x125"
+                }
 
 TOKEN_INPUT_LIMIT = 8

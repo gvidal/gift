@@ -1,49 +1,22 @@
 <div id="container">
   <div class="wrapper">
     <div id="content">
-      <%#*<h2>%>
-        <%#= @product.name  %>
-      <%#*</h2>%>
-      <%#= raw @product.description %>
-      <%#= add_to_wishlist(current_user, @product) if current_user -%>
-      <% if true -%>
-      <div id="welcomeHero">
-          <div id="slideshow-main">
-              <ul>
-                  <li class="p1 active">
-                      <a href="#">
-                          <img src="images/1_big.gif" width="430" height="290" alt=""/>
-                          <span class="opacity"></span>
-                          <span class="content"><h1>Title 1</h1><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p></span>
-                      </a>
-                  </li>
-                  <li class="p2">
-                      <a href="#">
-                          <img src="images/2_big.gif" width="430" height="290" alt=""/>
-                          <span class="opacity"></span>
-                          <span class="content"><h1>Title 2</h1><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p></span>
-                      </a>
-                  </li>
-                  <li class="p3">
-                      <a href="#">
-                          <img src="images/3_big.gif" width="430" height="290" alt=""/>
-                          <span class="opacity"></span>
-                          <span class="content"><h1>Title 3</h1><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p></span>
-                      </a>
-                  </li>
-              </ul>                                    
-          </div>
-
-          <div id="slideshow-carousel">            
-                <ul id="carousel" class="jcarousel jcarousel-skin-tango">
-                  <li><a href="#" rel="p1"><img src="images/1.gif" width="206" height="95" alt="#"/></a></li>
-                  <li><a href="#" rel="p2"><img src="images/2.gif" width="206" height="95" alt="#"/></a></li>
-                  <li><a href="#" rel="p3"><img src="images/3.gif" width="206" height="95" alt="#"/></a></li>
-                </ul>
-          </div>
-          <div class="clear"></div>
+      <h2>
+        <%= @product.name  %>
+      </h2>
+      <%= raw @product.description %>
+      <%= add_to_wishlist(current_user, @selected_variant) if current_user -%>
+      <div id="slider1" class="tinycarousel">
+      <a class="buttons prev" href="#">left</a>
+      <div class="viewport">
+        <ul class="overview">
+          <% 3.times do |time| %>
+            <li><%= image_tag(current_user.fb_picture, style: "width: 240px; height: 125px;") %></li>
+          <% end %>
+        </ul>
       </div>
-      <% end -%>
+      <a class="buttons next" href="#">right</a>
+      </div>
     </div>
     <div id="column">
       <div class="holder">

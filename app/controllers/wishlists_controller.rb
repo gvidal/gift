@@ -4,7 +4,7 @@ class WishlistsController < PublicController
     @wishlists = @current_user.active_wishlists
   end
   def show
-    @wishlists = @current_user.active_wishlists.find(params[:id])
+    @wishlist = @current_user.active_wishlists.find(params[:id])
   end
   
   def new
@@ -26,8 +26,18 @@ class WishlistsController < PublicController
     end
   end
   
-  def add
-    @friends = @graph.get_connections("me", "friends")
-#    @wishlists = @current_user.wishlists << .find(params[:id])
+  def add_variant
+    WishlistVariant.find_or_create_by_wishlist_id_and_variant_id(params[:id], params[:variant_id])
+    respond_to do |format|
+      format.all{ render :nothing => true}
+    end
   end
+  
+  def remove_variant
+    WishlistVariant.find_by_wishlist_id_and_variant_id(params[:id], params[:variant_id]).try(:destroy)
+    respond_to do |format|
+      format.all{ render :nothing => true}
+    end
+  end
+  
 end

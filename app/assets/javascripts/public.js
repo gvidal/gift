@@ -11,4 +11,6 @@
 // GO AFTER THE REQUIRES BELOW.
 //= require select2.min
 //= require wishlists
+//= require jquery.tinycarousel.min
 //= require products
+

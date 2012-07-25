@@ -68,7 +68,12 @@ Gift::Application.routes.draw do
 #  resources :tasks
   resources :authentications  
   resources :products
-  resources :wishlists
+  resources :wishlists do
+    member do
+      post 'add_variant/:variant_id' => "wishlists#add_variant"
+      delete 'remove_variant/:variant_id' => "wishlists#remove_variant"
+    end
+  end
 #  root :to => 'home#index'
   root :to => 'products#index'
 #  
