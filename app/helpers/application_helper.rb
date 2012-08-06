@@ -1,4 +1,11 @@
 module ApplicationHelper
+  def vote_wishlist_variant_url(wishlist, variant, true_or_false)
+    tos = true_or_false.to_s 
+    raise ArgumentError, "value must be true or false" if tos != "true" && tos != "false"
+    url_for :controller => "wishlists", :action => "vote", :id => wishlist.id,:variant_id => variant.id,
+            :vote => true_or_false.to_s
+  end
+  
   def token_input(form, relation, options = {})
     object = form.object
     association_type = object.association(relation).reflection.macro

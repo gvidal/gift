@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120710163947) do
+ActiveRecord::Schema.define(:version => 20120731174049) do
 
   create_table "admin_users", :force => true do |t|
     t.string   "email"
@@ -126,6 +126,25 @@ ActiveRecord::Schema.define(:version => 20120710163947) do
   end
 
   add_index "variants", ["product_id"], :name => "index_variants_on_product_id"
+
+  create_table "wishlist_variant_votes", :force => true do |t|
+    t.integer  "wishlist_id"
+    t.integer  "variant_id"
+    t.boolean  "vote"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "wishlist_variant_votes", ["wishlist_id", "variant_id"], :name => "index_wishlist_variant_votes_on_wishlist_id_and_variant_id", :unique => true
+
+  create_table "wishlist_variants", :force => true do |t|
+    t.integer  "wishlist_id"
+    t.integer  "variant_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "wishlist_variants", ["wishlist_id", "variant_id"], :name => "index_wishlist_variants_on_wishlist_id_and_variant_id", :unique => true
 
   create_table "wishlists", :force => true do |t|
     t.integer  "user_admin_id"

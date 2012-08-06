@@ -1,18 +1,43 @@
 <div id="container">
   <div class="wrapper">
-    <h1><%= link_to t('public.wishlists.index.new'), [:new, :wishlist] -%></h1>
-    <ul class="container-list">
-    <% @wishlists.each_with_index do |wishlist,index| -%>
+    <h1>
+      <%= @wishlist.name  %>
+    </h1>
+    <%= content_tag :ul, :class => "container-list", :id => "wishlist-list", :data => {"wishlist-id" => @wishlist.id} do %>
+    <% @variants.each do |variant| -%>
       <li>
         <div class="description-text">
-          <p><%= wishlist.description %></p>
+          <p>
+            <%= raw variant.product.description %>
+          </p>
         </div>
         <div class="title-list">
-          <h1 class="main-list"><%= link_to wishlist.name, [wishlist] %></h1>
-          <%= image_tag wishlist.user_admin.fb_picture %>
+          <div class="wishlist-info">
+            <h1 class="main-list">
+              <%= link_to variant.product.name, [variant.product] %>
+            </h1><br />
+            <div class="wishlist-vote ok">
+              <a href="<%= vote_wishlist_variant_url(@wishlist, variant, true) %>">
+                <%= image_tag(asset_path("button-ok.png"), :class => (variant.voted_ok?(@wishlist) ? "voted" : "")) %>
+              </a>
+              <span class="wishlist-num-votes-ok">
+                <%= t('public.wishlists.show.votes', votes: variant.num_votes(@wishlist, true)) %>
+              </span>
+            </div><br />
+            <div class="wishlist-vote ko">
+              <a href="<%= vote_wishlist_variant_url(@wishlist, variant, false) %>">
+                 <%= image_tag(asset_path("button-ko.jpg"), :class => (variant.voted_ko?(@wishlist) ? "voted" : "")) %>
+              </a>
+              <span class="wishlist-num-votes-ko">
+                <%= t('public.wishlists.show.votes', votes: variant.num_votes(@wishlist, false)) %>
+              </span>
+            </div><br />
+          </div>
+          <%= image_tag variant.first_image.url(:original), 
+                          {style: "width: 60px; height:60px;", class: "wishlist-image"} %>
         </div>
       </li>
     <% end -%>
-  </ul>
+  <% end -%>
   </div>
 </div>

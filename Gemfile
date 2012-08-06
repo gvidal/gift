@@ -14,7 +14,7 @@ gem 'kaminari'
 gem 'bcrypt-ruby'
 gem 'meta_search'
 gem 'interactive_editor'
-gem 'paperclip', :git => "git://github.com/thoughtbot/paperclip.git"
+gem 'paperclip',"~> 3.0"# :git => "git://github.com/thoughtbot/paperclip.git"
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

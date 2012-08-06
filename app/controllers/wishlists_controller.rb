@@ -5,6 +5,7 @@ class WishlistsController < PublicController
   end
   def show
     @wishlist = @current_user.active_wishlists.find(params[:id])
+    @variants = @wishlist.variants
   end
   
   def new
@@ -23,6 +24,21 @@ class WishlistsController < PublicController
       redirect_to wishlists_url, flash: {notice: t('public.wishlists.successfully_created')}
     else
       render "new"
+    end
+  end
+  
+  def vote
+    vote = (params[:vote] == "true" || false)
+    @wishlist = @current_user.active_wishlists.find(params[:id])
+    @variant = Variant.find(params[:variant_id])
+    @wishlist_variant_vote =  @wishlist.wishlist_variant_votes.find_by_variant_id(params[:variant_id]) || 
+                              @wishlist.wishlist_variant_votes.new(:variant_id => params[:variant_id])
+    @wishlist_variant_vote.vote = vote
+    @wishlist_variant_vote.save
+    
+    respond_to do |format|
+      format.js{ render :json => {vote_ok: t('public.wishlists.show.votes', votes: @variant.num_votes(@wishlist, true)), 
+                                  vote_ko: t('public.wishlists.show.votes', votes: @variant.num_votes(@wishlist, false))}}
     end
   end
   

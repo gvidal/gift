@@ -8,7 +8,9 @@
           <p><%= wishlist.description %></p>
         </div>
         <div class="title-list">
-          <h1 class="main-list"><%= link_to wishlist.name, [wishlist] %></h1>
+          <h1 class="main-list">
+            <%= link_to wishlist.name, [wishlist] %>
+          </h1>
           <%= image_tag wishlist.user_admin.fb_picture %>
         </div>
       </li>

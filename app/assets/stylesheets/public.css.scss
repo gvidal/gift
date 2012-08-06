@@ -17,12 +17,25 @@
     .wrapper{
         .container-list{
             list-style: none;
-            img{float:left;}
-            h1.main-list{border-bottom: medium none; float:right;padding-left: 10px;}
-            p{float:left;}
-            li{border-bottom: 1px dotted #CCCCCC; padding-bottom: 19px; word-wrap: break-word;overflow: hidden;}
-            .description-text{float:right;}
-            .title-list{float:left;}
+            li{
+                border-bottom: 1px dotted #CCCCCC; padding-bottom: 19px; word-wrap: break-word;overflow: hidden;
+                img.wishlist-image{float:left;}
+                .wishlist-info{
+                    float:right;
+                    h1.main-list{border-bottom: medium none; float:right;}
+                    div.wishlist-vote {
+                        &.ok{}
+                        &.ko{}
+                        img {
+                            opacity: 0.5;width: 20px; height: 20px;
+                            &.voted{opacity: 1.0;}
+                        }
+                        span{padding-top: 2px;}
+                    }
+                    .description-text{float:right;}
+                    .title-list{float:left;}
+                }
+            }
         }
     }
 }

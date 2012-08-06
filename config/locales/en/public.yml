@@ -5,6 +5,8 @@ en:
       successfully_created: "Wishlist successfully created"
       index:
         title: "My Gifts"
+      show:
+        votes: "%{votes} votes"
     tabs:
       main_tabs:
         home: "Home"
