@@ -35,16 +35,17 @@ class Product < ActiveRecord::Base
   end
   
   def self.are_active(value = true)
-    table_name = self.quoted_table_name
+    arel_avaible_on = self.arel_table[:avaible_on]
+    arel_expires_on = self.arel_table[:expires_on]
+    arel_is_active = self.arel_table[:is_active]
+    time = Time.zone.now.to_s(:default)
     if value
-     a =  self.where(["#{table_name}.avaible_on >= ? OR #{table_name}.avaible_on IS NULL",Time.zone.now.to_s(:default)])
-     a = a.where(["#{table_name}.expires_on <= ? OR #{table_name}.expires_on IS NULL", Time.zone.now.to_s(:default)])
-     a = a.where(:is_active => true)
-     a
+     products = self.where(:is_active => true)
+     products = products.where(arel_avaible_on.gteq(time).or(arel_avaible_on.eq(nil)))
+     products = products.where(arel_expires_on.lteq(time).or(arel_expires_on.eq(nil)))
+     products
     else
-     time = Time.zone.now.to_s(:default)
-     self.where(["#{table_name}.avaible_on < ? OR #{table_name}.expires_on > ? OR #{table_name}.is_active = ?",
-                 time, time, false])
+     self.where(arel_avaible_on.lt(time).or(arel_expires_on.gt(time)).or(arel_is_active).eq(false))
     end
   end
   

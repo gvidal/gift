@@ -1,47 +1,4 @@
 Gift::Application.routes.draw do
-
- 
-
-
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
-
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
-
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', :on => :collection
-  #     end
-  #   end
   match 'admin' => "admin_users#new"
   resources :admin_users, :only => [:new, :create] do
     post 'log_in', :on => :collection
@@ -57,15 +14,11 @@ Gift::Application.routes.draw do
     resources   :option_types do
       resources :option_values
     end
-#    match 'log_in' => "home#log_in"
     match 'home' => 'home#index'
   end
   
   match '/auth/:provider/callback' => 'authentications#create'  
   match 'oauth/redirect' => "oauth#redirect"
-#  devise_for :users  
-#  resources :projects  
-#  resources :tasks
   resources :authentications  
   resources :products
   resources :wishlists do
@@ -73,8 +26,19 @@ Gift::Application.routes.draw do
       post 'add_variant/:variant_id' => "wishlists#add_variant"
       delete 'remove_variant/:variant_id' => "wishlists#remove_variant"
       post 'variant_id/:variant_id/:vote' => "wishlists#vote" #, :constraints => { vote: /true|false/ }
+      post 'create_payments'
+    end
+    resources :payment_summaries, only: [] do
+      member do
+        get 'summary'
+        put 'confirm'
+      end
     end
   end
-  
+  resources :payments, only: [] do
+    member do
+      get 'pay'
+    end
+  end
   root :to => 'products#index'
 end

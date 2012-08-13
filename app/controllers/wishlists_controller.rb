@@ -42,6 +42,21 @@ class WishlistsController < PublicController
     end
   end
   
+  def create_payments
+    @wishlist = @current_user.own_wishlists.state("new").find(params[:id])
+    @participants = @wishlist.all_participants
+    variants_with_quantity = params[:variants].values
+    variants_with_quantity.reject!{|x| x[:variant_id].blank? || x[:quantity].to_i <= 0}
+    if variants_with_quantity.present? && (@payment_summary = @wishlist.create_payment_summary!(@participants, variants_with_quantity))
+      flash[:notice] = "Please, confirm the payment"
+      redirect_to summary_wishlist_payment_summary_url @wishlist.id, @payment_summary.id 
+    else
+      flash[:error] = "Something went wrong"
+      redirect_to wishlist_url @wishlist.id
+    end
+    
+  end
+  
   def add_variant
     WishlistVariant.find_or_create_by_wishlist_id_and_variant_id(params[:id], params[:variant_id])
     respond_to do |format|

@@ -2,11 +2,25 @@ en:
   public:
     may_be_interested: "Products that you may be interested"
     wishlists:
+      one_variant_must_be_selected: "At least one product must be selected!"
       successfully_created: "Wishlist successfully created"
       index:
         title: "My Gifts"
       show:
+        number_of_participants: "Number of participants"
+        total: "Total"
+        per_user: "Total per user"
+        quantity: "Quantity: "
+        add_to_cart: "Add to cart"
         votes: "%{votes} votes"
+        buy_gifts: "Buy the gifts"
+    payment_summaries:
+      confirm:
+        item_name:  "Name"  
+        reference:  "Reference"
+        price:      "Price"
+        quantity:   "Quantity"
+        total:      "Total"
     tabs:
       main_tabs:
         home: "Home"

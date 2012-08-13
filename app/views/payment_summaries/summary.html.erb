@@ -1,0 +1,66 @@
+<div id="container">
+  <div class="wrapper">
+    <h1>
+      Summary
+    </h1>
+    <table cellspacing="0" cellpadding="0" summary="Summary Here">
+      <thead>
+        <tr>
+          <% %w(item_name reference price quantity total).each do |name| -%>
+            <th>
+              <%= t(name, :tscope => @tscope) %>
+            </th>
+          <% end -%>
+        </tr>
+      </thead>
+      <tbody>
+        <% @payment_summary_variants.each do |psv| -%>
+        <tr class="light">
+          <td>
+            <%= psv.variant.product.name %>
+          </td>
+          <td>
+            <%= psv.variant.sku %>
+          </td>
+          <td>
+            <%= psv.price %>
+          </td>
+          <td>
+            <%= psv.quantity %>
+          </td>
+          <td>
+            <%= psv.price * psv.quantity %>
+          </td>
+        </tr>
+        <% end -%>
+      </tbody>
+    </table>
+    <table cellspacing="0" cellpadding="0" summary="Summary Here">
+      <thead>
+        <tr>
+          <% %w(number_of_participants total per_user).each do |name| -%>
+            <th>
+              <%= t(name, :tscope => @tscope) %>
+            </th>
+          <% end -%>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="light">
+          <td>
+            <%= @wishlist.all_participants.count %>
+          </td>
+          <td>
+            <%= @payment_summary.total %>
+          </td>
+          <td>
+            <%= @payment_summary.price_to_pay %>
+          </td>
+      </tbody>
+    </table>
+    <div class="confirmation-list">
+      <%= link_to "Back", wishlist_url(@wishlist.id) %>
+      <%= link_to "Confirm", confirm_wishlist_payment_summary_url(@wishlist.id, @payment_summary.id), method: :put %>
+    </div>
+  </div>
+</div>

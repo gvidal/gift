@@ -8,4 +8,8 @@ module WishlistsHelper
                 options,multiple: true, 
                 :class => :add_to_wishlist, :data => {variantid: variant.id}
   end
+  
+  def is_wishlist_admin?(current_user, wishlist)
+    wishlist.user_admin_id == current_user.id
+  end
 end

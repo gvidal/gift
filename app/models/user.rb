@@ -19,9 +19,7 @@ class User < ActiveRecord::Base
   scope :with_facebook_uid, lambda{|values| includes(:authentications).where(["authentications.uid IN (?) AND authentications.provider = ?", values,'facebook'])}
   
   def active_wishlists
-    wishlist_aux = Wishlist.arel_table
-    user_wishlist_aux = UserWishlist.arel_table
-    Wishlist.where(wishlist_aux[:user_admin_id].eq(self.id).or(user_wishlist_aux[:user_id].eq(self.id))).includes(:user_wishlists).active
+    Wishlist.with_user(self).active.state("new")
   end
   
   def apply_omniauth(omniauth)

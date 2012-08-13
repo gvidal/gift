@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120731174049) do
+ActiveRecord::Schema.define(:version => 20120813175757) do
 
   create_table "admin_users", :force => true do |t|
     t.string   "email"
@@ -72,6 +72,33 @@ ActiveRecord::Schema.define(:version => 20120731174049) do
     t.integer  "position"
   end
 
+  create_table "payment_summaries", :force => true do |t|
+    t.float    "price_to_pay"
+    t.integer  "wishlist_id"
+    t.boolean  "confirmed",    :default => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.float    "total"
+  end
+
+  create_table "payment_summary_variants", :force => true do |t|
+    t.integer  "variant_id"
+    t.integer  "payment_summary_id"
+    t.float    "price"
+    t.integer  "quantity"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  create_table "payments", :force => true do |t|
+    t.string   "state"
+    t.string   "stripe_customer_token"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.integer  "user_id"
+    t.integer  "payment_summary_id"
+  end
+
   create_table "product_option_types", :force => true do |t|
     t.integer  "option_type_id", :null => false
     t.integer  "product_id",     :null => false
@@ -123,9 +150,19 @@ ActiveRecord::Schema.define(:version => 20120731174049) do
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
     t.float    "price"
+    t.integer  "quantity"
   end
 
   add_index "variants", ["product_id"], :name => "index_variants_on_product_id"
+
+  create_table "wishlist_payment_variants", :force => true do |t|
+    t.integer  "wishlist_id"
+    t.integer  "variant_id"
+    t.integer  "payment_id"
+    t.integer  "quantity"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "wishlist_variant_votes", :force => true do |t|
     t.integer  "wishlist_id"
@@ -150,10 +187,11 @@ ActiveRecord::Schema.define(:version => 20120731174049) do
     t.integer  "user_admin_id"
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
-    t.boolean  "active",                    :default => true, :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+    t.boolean  "active",                    :default => true,  :null => false
     t.string   "gift_receiver_facebook_id"
+    t.string   "state",                     :default => "new"
   end
 
   add_index "wishlists", ["user_admin_id"], :name => "index_wishlists_on_user_admin_id"

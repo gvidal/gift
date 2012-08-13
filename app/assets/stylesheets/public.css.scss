@@ -15,27 +15,86 @@
 */
 #container{
     .wrapper{
-        .container-list{
+        div.submit-wishlist{
+            display: none; float: right;padding-bottom: 20px;
+        }
+        .button.blue{float: right;}
+        h1{padding-bottom: 12px;margin-top: 10px;}
+        ul.container-list{
+            width: 850px;
             list-style: none;
-            li{
-                border-bottom: 1px dotted #CCCCCC; padding-bottom: 19px; word-wrap: break-word;overflow: hidden;
-                img.wishlist-image{float:left;}
-                .wishlist-info{
-                    float:right;
-                    h1.main-list{border-bottom: medium none; float:right;}
-                    div.wishlist-vote {
-                        &.ok{}
-                        &.ko{}
-                        img {
-                            opacity: 0.5;width: 20px; height: 20px;
-                            &.voted{opacity: 1.0;}
-                        }
-                        span{padding-top: 2px;}
+            li.variant-item{
+                border-bottom: 1px dotted #CCCCCC; padding-bottom: 19px; word-wrap: break-word;overflow: hidden;max-height: 100px;
+                ul.wishlist-box{
+                    float:left;
+                    list-style: none;
+                    li.wishlist-select-item{
+                        display: none;
+                        float: left;
+                        padding-top: 20px;
                     }
-                    .description-text{float:right;}
-                    .title-list{float:left;}
+                    li.wishlist-image{
+                        float:left;
+                        width: 60px;
+                        img{width: 60px; height:60px;}
+                    }
+                    li.wishlist-info{
+                        float:left;
+                        margin-left: 9px;
+                        h1.main-list{font-size: 19px;margin: 0; padding: 0px;float: left;}
+                        div.wishlist-vote {
+                            float: left;
+                            a{float: left;}
+                            margin-top: 8px;
+                            &.ok{}
+                            &.ko{}
+                            img {
+                                opacity: 0.5;width: 20px; height: 20px;
+                                &.voted{opacity: 1.0;}
+                            }
+                            span{margin-top: 2px;float: left;margin-left: 4px;}
+                        }
+                    }
+                    li.wishlist-description{
+                        float:left;
+                        margin-left: 30px;
+                        width: 492px;
+                    }
+                    li.wishlist-quantity{
+                        margin-top: 25px;
+                        display: none;
+                        float:right;
+                        input{width: 20px;}
+                    }
                 }
             }
         }
     }
+}
+
+.button {
+    display: inline-block;
+    zoom: 1;
+    vertical-align: baseline;
+    margin: 0 2px;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font: 14px/100% Arial, Helvetica, sans-serif;
+    padding: .5em 2em .55em;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+    -webkit-border-radius: .5em;
+    -moz-border-radius: .5em;
+    border-radius: .5em;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+}
+
+.blue {
+    color: #D9EEF7;
+    border: solid 1px #0076A3;
+    background: #0095CD;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00adee', endColorstr='#0078a5');
 }

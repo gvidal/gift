@@ -6,7 +6,8 @@
 <meta content="no" http-equiv="imagetoolbar">
 <link type="text/css" href="styles/layout.css" rel="stylesheet" />
   <%= stylesheet_link_tag    "application", "public", media: "all" %>
-  <%= javascript_include_tag "application", "public" %>
+  <%= javascript_include_tag "https://js.stripe.com/v1/","application", "public" %>
+  <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
   <%= csrf_meta_tags %>
 </head>
 <body id="top">

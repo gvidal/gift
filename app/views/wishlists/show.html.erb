@@ -1,43 +1,64 @@
 <div id="container">
   <div class="wrapper">
+    <% if is_wishlist_admin?(current_user, @wishlist) -%>
+      <button class="button blue" id="wishlist-start-payment"><%= t('public.wishlists.show.buy_gifts') %></button>
+    <% end -%>
     <h1>
       <%= @wishlist.name  %>
     </h1>
-    <%= content_tag :ul, :class => "container-list", :id => "wishlist-list", :data => {"wishlist-id" => @wishlist.id} do %>
-    <% @variants.each do |variant| -%>
-      <li>
-        <div class="description-text">
-          <p>
-            <%= raw variant.product.description %>
-          </p>
-        </div>
-        <div class="title-list">
-          <div class="wishlist-info">
-            <h1 class="main-list">
-              <%= link_to variant.product.name, [variant.product] %>
-            </h1><br />
-            <div class="wishlist-vote ok">
-              <a href="<%= vote_wishlist_variant_url(@wishlist, variant, true) %>">
-                <%= image_tag(asset_path("button-ok.png"), :class => (variant.voted_ok?(@wishlist) ? "voted" : "")) %>
-              </a>
-              <span class="wishlist-num-votes-ok">
-                <%= t('public.wishlists.show.votes', votes: variant.num_votes(@wishlist, true)) %>
-              </span>
-            </div><br />
-            <div class="wishlist-vote ko">
-              <a href="<%= vote_wishlist_variant_url(@wishlist, variant, false) %>">
-                 <%= image_tag(asset_path("button-ko.jpg"), :class => (variant.voted_ko?(@wishlist) ? "voted" : "")) %>
-              </a>
-              <span class="wishlist-num-votes-ko">
-                <%= t('public.wishlists.show.votes', votes: variant.num_votes(@wishlist, false)) %>
-              </span>
-            </div><br />
-          </div>
-          <%= image_tag variant.first_image.url(:original), 
-                          {style: "width: 60px; height:60px;", class: "wishlist-image"} %>
-        </div>
-      </li>
+    <%= form_tag create_payments_wishlist_url(:id => @wishlist.id), method: :post do |f| %>
+      <%= content_tag :ul, :class => "container-list", :id => "wishlist-list", :data => {"wishlist-id" => @wishlist.id} do %>
+      <% @variants.each do |variant| -%>
+        <li class="variant-item">
+          <ul class="wishlist-box">
+            <% if is_wishlist_admin?(current_user, @wishlist) && variant.active?  -%>
+              <li class="wishlist-select-item">
+                <%= label_tag "variants[#{variant.id}][variant_id]", t('public.wishlists.show.add_to_cart') %>
+                <%= check_box_tag("variants[#{variant.id}][variant_id]", variant.id, "0", "checked" => false) %>
+              </li>
+            <% end -%>
+            <li class="wishlist-image">
+              <%= image_tag variant.first_image.url(:original) %>
+            </li>
+            <li class="wishlist-info">
+              <h1 class="main-list">
+                <%= link_to variant.product.name, [variant.product] %>
+              </h1><br />
+              <div class="wishlist-vote ok">
+                <a href="<%= vote_wishlist_variant_url(@wishlist, variant, true) %>">
+                  <%= image_tag(asset_path("button-ok.png"), :class => (variant.voted_ok?(@wishlist) ? "voted" : "")) %>
+                </a>
+                <span class="wishlist-num-votes-ok">
+                  <%= t('public.wishlists.show.votes', votes: variant.num_votes(@wishlist, true)) %>
+                </span>
+              </div><br />
+              <div class="wishlist-vote ko">
+                <a href="<%= vote_wishlist_variant_url(@wishlist, variant, false) %>">
+                   <%= image_tag(asset_path("button-ko.jpg"), :class => (variant.voted_ko?(@wishlist) ? "voted" : "")) %>
+                </a>
+                <span class="wishlist-num-votes-ko">
+                  <%= t('public.wishlists.show.votes', votes: variant.num_votes(@wishlist, false)) %>
+                </span>
+              </div><br />
+            </li>
+            <li class="wishlist-description">
+              <%= raw variant.product.description %>
+            </li>
+            <% if is_wishlist_admin?(current_user, @wishlist) && variant.active? -%>
+              <li class="wishlist-quantity">
+                <%= label_tag "variants[#{variant.id}][quantity]", t('public.wishlists.show.quantity') %>
+                <%= text_field_tag "variants[#{variant.id}][quantity]", 1 %>
+              </li>
+            <% end -%>
+          </ul>
+        </li>
+      <% end -%>
     <% end -%>
-  <% end -%>
+    <% if is_wishlist_admin?(current_user, @wishlist) -%>
+      <div class="submit-wishlist">
+        <%= submit_tag "Submit", id: "wishlist_payment" %>
+      </div>
+    <% end -%>
+  <% end %>
   </div>
 </div>
