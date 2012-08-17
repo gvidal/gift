@@ -1,10 +1,10 @@
 <div id="container">
   <div class="wrapper">
     <div id="respond">
-      <%= form_for @wishlist, url: [:wishlists], method: :post do |f| %>
+      <%= form_for @wishlist, method: :put do |f| %>
        <%= render partial: "form", locals: {f: f} %>
         <p>
-          <%= f.submit "Create Wishlist", id: :submit, name: :submit %>
+          <%= f.submit "Update Wishlist", id: :submit, name: :submit %>
           &nbsp;
           <%#*<input type="reset" value="Reset Form" tabindex="5" id="reset" name="reset">%>
         </p>
@@ -14,7 +14,7 @@
   <div id="column">
     <div id="featured">
       <ul>
-        <% @random_products.each do |product| -%>
+        <% @participants.each do |product| -%>
           <li>
             <h2><%= product.name %></h2>
             <p class="imgholder">

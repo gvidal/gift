@@ -13,4 +13,16 @@
 //= require wishlists
 //= require jquery.tinycarousel.min
 //= require products
+//= require payment_stripe
+$(document).ready(function(){
+  var flash = "";
+  for (var key in flash_messages) {
+      if (flash_messages.hasOwnProperty(key) && flash_messages[key] != "" && flash_messages[key] != null) {
+        flash += '<div class="' + key +'">' + flash_messages[key] + '</div>';
+      }
+  }
+   if(flash != ""){
+       $("div#container").prepend('<div class="wrapper">' + flash + '</div>'); 
+   }
+});
 

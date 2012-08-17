@@ -1,0 +1,55 @@
+<table cellspacing="0" cellpadding="0" summary="Summary Here">
+  <thead>
+    <tr>
+      <% %w(item_name reference price quantity total).each do |name| -%>
+        <th>
+          <%= t(name, :scope => tscope) %>
+        </th>
+      <% end -%>
+    </tr>
+  </thead>
+  <tbody>
+    <% payment_summary_variants.each do |psv| -%>
+    <tr class="light">
+      <td>
+        <%= psv.variant.product.name %>
+      </td>
+      <td>
+        <%= psv.variant.sku %>
+      </td>
+      <td>
+        <%= psv.price %>
+      </td>
+      <td>
+        <%= psv.quantity %>
+      </td>
+      <td>
+        <%= psv.price * psv.quantity %>
+      </td>
+    </tr>
+    <% end -%>
+  </tbody>
+</table>
+<table cellspacing="0" cellpadding="0" summary="Summary Here">
+  <thead>
+    <tr>
+      <% %w(total number_of_participants per_user).each do |name| -%>
+        <th>
+          <%= t(name, :scope => tscope) %>
+        </th>
+      <% end -%>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="light">
+      <td>
+        <%= payment_summary.total %>
+      </td>
+      <td>
+        <%= wishlist.all_participants.count %>
+      </td>
+      <td class="color-red">
+        <%= payment_summary.price_to_pay %>
+      </td>
+  </tbody>
+</table>

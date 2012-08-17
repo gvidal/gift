@@ -1,0 +1,38 @@
+<div id="container">
+  <div class="wrapper">
+    <h1>
+      Bill
+    </h1>
+    <%= render partial: "shared/payment", locals: { payment_summary: @payment_summary,
+                                                    wishlist: @wishlist,
+                                                    payment_summary_variants: @payment_summary_variants,
+                                                    tscope: ['public','payment_summaries', 'confirm']} %>
+    <div class="payment">
+      <div id="respond">
+      <%= form_for @payment, url: credit_card_payment_payment_url(@payment.id), method: :put, html:{id: "form_payment"} do |f| %>
+        <p>
+          <%= f.label :email %>
+          <%= f.text_field :email, value: f.object.email.present? ? f.object.email : @current_user.facebook_email %>
+        </p>
+        <p>
+          <%= label_tag "card_number", "Card Number" %>
+          <%= text_field_tag "card_number",params[:card_number].present? ? params[:card_number] : "", :class => "card-number" %>
+        </p>
+        <p>
+          <%= label_tag "cvc", "Security Code on Card (Cvc)" %>
+          <%= text_field_tag "cvc",params[:cvc].present? ? params[:cvc] : "", :class => "card-cvc" %>
+        </p>
+        <p>
+          <%= label_tag :card_month, "Card Expiration" %>  
+          <%= select_month nil, {add_month_numbers_true: true}, {name: nil, class: "card-expiry-month"}%>  
+          <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, class: "card-expiry-year"}%>  
+        </p>
+        <div class="payment-errors">
+          
+        </div>
+        <button type="submit" class="submit-button">Submit Payment</button>
+      <% end -%>
+      </div>
+    </div>
+  </div>
+</div>

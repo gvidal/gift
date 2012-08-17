@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120813175757) do
+ActiveRecord::Schema.define(:version => 20120816124445) do
 
   create_table "admin_users", :force => true do |t|
     t.string   "email"
@@ -73,12 +73,12 @@ ActiveRecord::Schema.define(:version => 20120813175757) do
   end
 
   create_table "payment_summaries", :force => true do |t|
-    t.float    "price_to_pay"
+    t.decimal  "price_to_pay", :precision => 8, :scale => 2
     t.integer  "wishlist_id"
-    t.boolean  "confirmed",    :default => false
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.float    "total"
+    t.boolean  "confirmed",                                  :default => false
+    t.datetime "created_at",                                                    :null => false
+    t.datetime "updated_at",                                                    :null => false
+    t.decimal  "total",        :precision => 8, :scale => 2
   end
 
   create_table "payment_summary_variants", :force => true do |t|
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(:version => 20120813175757) do
     t.datetime "updated_at",            :null => false
     t.integer  "user_id"
     t.integer  "payment_summary_id"
+    t.string   "email"
   end
 
   create_table "product_option_types", :force => true do |t|
@@ -138,18 +139,20 @@ ActiveRecord::Schema.define(:version => 20120813175757) do
   create_table "users", :force => true do |t|
     t.string   "current_token"
     t.date     "birth_date"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "facebook_email"
+    t.string   "stripe_costumer_id"
   end
 
   create_table "variants", :force => true do |t|
-    t.string   "sku",                       :null => false
-    t.integer  "product_id",                :null => false
-    t.integer  "avaible",    :default => 0, :null => false
-    t.boolean  "is_master",                 :null => false
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-    t.float    "price"
+    t.string   "sku",                                                     :null => false
+    t.integer  "product_id",                                              :null => false
+    t.integer  "avaible",                                  :default => 0, :null => false
+    t.boolean  "is_master",                                               :null => false
+    t.datetime "created_at",                                              :null => false
+    t.datetime "updated_at",                                              :null => false
+    t.decimal  "price",      :precision => 8, :scale => 2
     t.integer  "quantity"
   end
 
@@ -170,6 +173,7 @@ ActiveRecord::Schema.define(:version => 20120813175757) do
     t.boolean  "vote"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "user_id"
   end
 
   add_index "wishlist_variant_votes", ["wishlist_id", "variant_id"], :name => "index_wishlist_variant_votes_on_wishlist_id_and_variant_id", :unique => true

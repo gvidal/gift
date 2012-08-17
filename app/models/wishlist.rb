@@ -3,11 +3,14 @@ class Wishlist < ActiveRecord::Base
   
   has_many :user_wishlists
   has_many :users, through: :user_wishlists
-  belongs_to :gift_receiver_facebook, class_name: "Authentication", foreign_key: :uid, conditions: {provider: "facebook"}
+  belongs_to :gift_receiver_facebook, class_name: "Authentication", 
+                                      foreign_key: :uid, conditions: {provider: "facebook"}
   
   has_one :payment_summary, dependent: :destroy
-  has_one :payment_summary_to_confirm,  :class_name => "PaymentSummary", 
-                                        :conditions => {:confirmed => false}
+  has_one :payment_summary_to_confirm,  class_name: "PaymentSummary", 
+                                        conditions: {confirmed: false}
+  has_one :confirmed_payment_summary,  class_name: "PaymentSummary", 
+                                        conditions: {confirmed: true}                                    
   
   has_many :wishlist_variants, dependent: :destroy
   has_many :variants, through: :wishlist_variants
@@ -22,6 +25,17 @@ class Wishlist < ActiveRecord::Base
     user_id = (user.is_a?(User) ? user.id : user)
     where(wishlist_aux[:user_admin_id].eq(user_id).or(user_wishlist_aux[:user_id].eq(user_id))).includes(:user_wishlists)  
   }
+  scope :states, lambda{|*values|
+    state_aux = Wishlist.arel_table[:state]
+    state_conditions = nil
+    if value = values.slice!(0)
+      states_conditions = state_aux.eq(value) 
+    end
+    values.each do |value|
+      state_conditions = states_conditions.or(state_aux.eq(value))
+    end
+    where(state_conditions)
+  }
   scope :user_admin, lambda{|value|
     value = value.id if value.is_a?(User)
     where(user_admin_id: value)
@@ -30,7 +44,8 @@ class Wishlist < ActiveRecord::Base
   
   validates :gift_receiver_facebook_id, presence: true
   validates :state, inclusion: {in: %w(new paying payed)}
-  before_save  :users_are_friends
+  before_save   :users_are_friends
+  before_save   :set_active_to_false, :if => lambda{|wishlist| wishlist.state_change == ["paying", "payed"] }
   validate  :name, presence: true, uniqueness: {scope: :user_admin_id}
   
   accepts_nested_attributes_for :users, allow_destroy: true
@@ -88,11 +103,15 @@ class Wishlist < ActiveRecord::Base
     nil
   end
   
+  def get_payment(user)
+    self.payment_summary.payments.with_user(user).first
+  end
+  
   private
   def users_are_friends
     fb_uids = self.user_admin.graph_api.get_connections("me", "friends").map{|x| x["id"]}
     u = User.where(["users.id IN (?)", self.user_ids]).joins(:authentications)
-    self.users = u.where(:authentications => {:uid => fb_uids, :providers => "facebook"}).to_a
+    self.users = u.where(:authentications => {uid: fb_uids, provider: "facebook"}).to_a
   end
   
   def price_per_user(users, variants_with_quantity)
@@ -103,6 +122,10 @@ class Wishlist < ActiveRecord::Base
       result + (variant.price * quantity.to_i.to_f)
     end
     total/num_users
+  end
+  def set_active_to_false
+    self.active = false
+    true
   end
   
 end

@@ -8,8 +8,12 @@ class PaymentSummary < ActiveRecord::Base
   validates  :wishlist_id, :price_to_pay, presence: true
   validate    :wishlist_summary_variants_have_same_price, on: :update
   
-  after_save :create_payments, :if => lambda{|payment_summary| payment_summary.confirmed_change == [false, true]}
-  after_save :set_wishlist_state_to_paying, :if => lambda{|payment_summary| payment_summary.confirmed_change == [false, true]}
+  after_save :create_payments, 
+                      :if => lambda{|payment_summary| payment_summary.confirmed_change == [false, true]},
+                      :on => :update
+  after_save :set_wishlist_state_to_paying, 
+                      :if => lambda{|payment_summary| payment_summary.confirmed_change == [false, true]},
+                      :on => :update
   
   def confirm
     self.confirmed = true

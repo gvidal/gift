@@ -1,11 +1,30 @@
 class WishlistsController < PublicController
   before_filter :user_needs_to_be_logged_in
   def index
-    @wishlists = @current_user.active_wishlists
+    @wishlists = @current_user.active_wishlists.includes(:user_admin, {confirmed_payment_summary: :payments})
   end
   def show
-    @wishlist = @current_user.active_wishlists.find(params[:id])
+    @wishlist = @current_user.active_wishlists.includes(:variants).find(params[:id])
     @variants = @wishlist.variants
+  end
+  def edit
+    @wishlist = @current_user.own_wishlists.state("new").find(params[:id])
+    @friends = @graph.get_connections("me", "friends")
+    @registered_friends = User.with_facebook_uid(@friends.map{|x| x["id"]})
+  end
+  
+  def update
+    @wishlist = @current_user.own_wishlists.state("new").find(params[:id])
+    @friends = @graph.get_connections("me", "friends")
+    @registered_friends = User.with_facebook_uid(@friends.map{|x| x["id"]})
+    @friends_for_select = @wishlist.users.to_a.reject{|x| x == @current_user}
+    if @wishlist.save
+      flash[:notice] = t('public.wishlists.successfully_created')
+      redirect_to wishlist_url @wishlist.id
+    else
+      flash[:error] = t('public.wishlists.error')
+      render "edit"
+    end
   end
   
   def new
@@ -23,16 +42,18 @@ class WishlistsController < PublicController
     if @wishlist.save
       redirect_to wishlists_url, flash: {notice: t('public.wishlists.successfully_created')}
     else
+      flash[:error] = t('public.wishlists.error')
       render "new"
     end
   end
   
   def vote
     vote = (params[:vote] == "true" || false)
-    @wishlist = @current_user.active_wishlists.find(params[:id])
+    @wishlist = @current_user.active_wishlists.state("new").find(params[:id])
     @variant = Variant.find(params[:variant_id])
-    @wishlist_variant_vote =  @wishlist.wishlist_variant_votes.find_by_variant_id(params[:variant_id]) || 
-                              @wishlist.wishlist_variant_votes.new(:variant_id => params[:variant_id])
+    @wishlist_variant_vote =  @wishlist.wishlist_variant_votes.find_by_variant_id_and_user_id(params[:variant_id], @current_user.id) || 
+                              @wishlist.wishlist_variant_votes.new(:variant_id => params[:variant_id],
+                                                                    :user_id => @current_user.id)
     @wishlist_variant_vote.vote = vote
     @wishlist_variant_vote.save
     

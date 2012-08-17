@@ -1,20 +1,35 @@
 <div id="container">
   <div class="wrapper">
-    <h1><%= link_to t('public.wishlists.index.new'), [:new, :wishlist] -%></h1>
+    <h1>
+      <%= link_to t('public.wishlists.index.new'), [:new, :wishlist] -%>
+    </h1>
     <ul class="container-list">
-    <% @wishlists.each_with_index do |wishlist,index| -%>
-      <li>
-        <div class="description-text">
-          <p><%= wishlist.description %></p>
-        </div>
-        <div class="title-list">
-          <h1 class="main-list">
-            <%= link_to wishlist.name, [wishlist] %>
-          </h1>
-          <%= image_tag wishlist.user_admin.fb_picture %>
-        </div>
-      </li>
-    <% end -%>
-  </ul>
+      <% @wishlists.each_with_index do |wishlist,index| -%>
+        <li class="wishlist-list-index">
+          <ul class="wishlist-box">
+            <li class="wishlist-image">
+              <%= image_tag wishlist.user_admin.fb_picture %>
+            </li>
+            <li class="wishlist-info">
+              <h1 class="main-list">
+                <%= link_to wishlist.name, [wishlist] %>
+              </h1>
+            </li>
+            <li class="wishlist-description">
+              <%= wishlist.description %>
+            </li>
+            <% if wishlist.state == "paying" -%>
+            <li class="wishlist-link-to">
+              <%= link_to t('public.wishlists.index.pay'), pay_payment_url(wishlist.get_payment(@current_user)), :class => "pay" %>
+            </li>
+            <% elsif is_wishlist_admin?(@current_user, wishlist) && wishlist.state == "new" -%>
+            <li class="wishlist-link-to">
+              <%= link_to t('public.wishlists.index.edit'), edit_wishlist_url(wishlist), :class => "public-edit-action" %>
+            </li>
+            <% end -%>
+          </ul>
+        </li>
+      <% end -%>
+    </ul>
   </div>
 </div>

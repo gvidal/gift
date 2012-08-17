@@ -6,6 +6,7 @@ en:
       successfully_created: "Wishlist successfully created"
       index:
         title: "My Gifts"
+        pay: "Pay!"
       show:
         number_of_participants: "Number of participants"
         total: "Total"
@@ -21,6 +22,8 @@ en:
         price:      "Price"
         quantity:   "Quantity"
         total:      "Total"
+        number_of_participants: "Number of participants"
+        per_user: "Price to pay"
     tabs:
       main_tabs:
         home: "Home"

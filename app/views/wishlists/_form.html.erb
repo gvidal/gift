@@ -1,0 +1,19 @@
+<p>
+  <%= f.select :gift_receiver_facebook_id, @friends.sort{|a,b| a["name"] <=> b["name"]}.map{|friend|[friend["name"], friend["id"]]}, :include_blank => "" %>
+  <%= f.label(:gift_receiver_facebook_id,content_tag(:small, Wishlist.human_attribute_name(:gift_receiver_facebook_id))) %>
+</p>
+<p>
+  <%= f.text_field :name %>
+  <%= f.label :name,content_tag(:small, Wishlist.human_attribute_name(:name)) %>
+</p>
+<p>
+  <%= f.select :user_ids, 
+                @registered_friends.map{|friend|[friend.graph_api.get_object("me")["name"], friend.id]},
+                { :prompt => "Please select",:include_blank => ""},
+                { :multiple => true } %>
+  <%= f.label :user_ids,content_tag(:small, Wishlist.human_attribute_name(:users)) %>
+</p>
+<p>
+  <%= f.label :description,content_tag(:small, Wishlist.human_attribute_name(:description)) %>
+  <%= f.text_area :description, :cols => "100%" %>
+</p>

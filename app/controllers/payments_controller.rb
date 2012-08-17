@@ -1,20 +1,24 @@
 class PaymentsController < PublicController
   before_filter :user_needs_to_be_logged_in
-  before_filter :load_wishlist
-  def summary
-    @payment_summary = @wishlist.create_payment_summary!(users, variant_ids_with_quantity)
-    if @payment_summary
-      flash[:notice] = "Please, confirm the payment"
-      redirect_to confirm_wishlist_payment_summary_url @wishlist.id, @payment_summary.id 
-    else
-      flash[:error] = "Something went wrong"
-      redirect_to wishlist_url @wishlist.id
-    end
+  
+  def pay
+    @payment = @current_user.payments.state("to_pay").includes(:payment_summary => [:wishlist, :payment_summary_variants]).find(params[:id])
+    @payment_summary = @payment.payment_summary
+    @wishlist = @payment_summary.wishlist
+    @payment_summary_variants = @payment_summary.payment_summary_variants
   end
   
-  private
-  def load_wishlist
-    @wishlist = Wishlist.active.state("new").find_by_user_admin_id_and_wishlist_id(current_user.id, params[:wishlist_id])
-    raise ActiveRecord::RecordNotFound unless @wishlist
+  def credit_card_payment
+    @payment = @current_user.payments.state("to_pay").includes(:payment_summary => [:wishlist, :payment_summary_variants]).find(params[:id])
+    @payment_summary = @payment.payment_summary
+    @wishlist = @payment_summary.wishlist
+    @payment_summary_variants = @payment_summary.payment_summary_variants
+    if @payment.save_with_payment(params[:payment])
+      flash[:notice] = "Payment done!"
+      redirect_to root_url
+    else
+      flash[:error] = "Something went wrong"
+      render "pay"
+    end
   end
 end

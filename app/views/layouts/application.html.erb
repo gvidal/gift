@@ -4,11 +4,11 @@
 <title>Internet Business | Style Demo</title>
 <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
 <meta content="no" http-equiv="imagetoolbar">
-<link type="text/css" href="styles/layout.css" rel="stylesheet" />
   <%= stylesheet_link_tag    "application", "public", media: "all" %>
   <%= javascript_include_tag "https://js.stripe.com/v1/","application", "public" %>
   <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
   <%= csrf_meta_tags %>
+  <%= set_flash_messages_variable(flash)  %>
 </head>
 <body id="top">
   <%= render partial: "shared/layout/header", locals: {current_user: current_user} %>
@@ -16,17 +16,6 @@
   <%= render partial: "shared/layout/breadcrumb" %>
 <!-- ####################################################################################################### -->
 <%= yield %>
-<%#*<div id="container">%>
-  <%#*<div class="wrapper">%>
-    <%#*<div id="content">%>
-      <%#= yield %>
-    <%#*</div>%>
-    <%#*<div id="column">%>
-      <%#= yield :sidebar %> 
-    <%#*</div>%>
-    <%#*<br class="clear">%>
-  <%#*</div>%>
-<%#*</div>%>
 <!-- ####################################################################################################### -->
 <div id="footer">
   <div class="wrapper">
@@ -87,18 +76,3 @@
 
 </body>
 </html>
-
-<% if false %>
-<html>
-<head>
-  <title>Gift</title>
-  
-</head>
-<body>
-  <%#= link_to 'Login', Koala::Facebook::OAuth.new.url_for_oauth_code(:callback => oauth_redirect_url) %>
-
-<%= yield %>
-
-</body>
-</html>
-<% end %>

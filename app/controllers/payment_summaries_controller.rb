@@ -13,7 +13,6 @@ class PaymentSummariesController < PublicController
       redirect_to pay_payment_url(@payment.id)
     else
       flash[:error] = "Something happened"
-      require 'ruby-debug';debugger;1
       redirect_to summary_wishlist_payment_summary_url(@wishlist.id, @payment_summary.id)
     end
   end

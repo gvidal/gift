@@ -38,6 +38,7 @@ Gift::Application.routes.draw do
   resources :payments, only: [] do
     member do
       get 'pay'
+      put 'credit_card_payment'
     end
   end
   root :to => 'products#index'
