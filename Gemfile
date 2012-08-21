@@ -18,6 +18,9 @@ gem 'stripe'
 gem 'paperclip',"~> 3.0"# :git => "git://github.com/thoughtbot/paperclip.git"
 # Gems used only for assets and not required
 # in production environments by default.
+group :development do
+  gem 'rails-erd'
+end
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'

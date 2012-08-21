@@ -3,9 +3,9 @@
   <%= raw render(:partial => "/admin/shared/index_table", 
                  :locals => {:title => "Variants",
                               :new_object_url => @product.option_types.present?  ? new_admin_product_variant_url(@product) : nil,
-                              :headers => [Variant.human_attribute_name(:sku), Variant.human_attribute_name(:avaible), Variant.human_attribute_name(:price)],
+                              :headers => [Variant.human_attribute_name(:sku), Variant.human_attribute_name(:quantity), Variant.human_attribute_name(:price)],
                               :content => @variants.map{|variant|
-                                  OpenStruct.new(:content_methods => [variant.sku, variant.avaible, variant.price],
+                                  OpenStruct.new(:content_methods => [variant.sku, variant.quantity, variant.price],
                                                  :actions => [link_to(t('admin.edit'), edit_admin_product_variant_url(@product, variant), :class => "edit"),
                                                               link_to(t('admin.delete'), admin_product_variant_url(@product, variant), :class => "delete", :method => :destroy, :confirm => t('admin.are_you_sure')) ])
                               }}) %>

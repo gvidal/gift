@@ -3,7 +3,11 @@ class Admin::OptionValuesController < AdminController
   before_filter :set_url_callback
   def index
     @option_values = (@option_type.present?) ? @option_type.option_values : OptionValue
-    @option_values = @option_values.search(params[:search]).page(params[:page]).per(params[:per])
+    @option_values = @option_values.search(params[:search])
+    respond_to do |format|
+      format.html{@option_values = @option_values.page(params[:page]).per(params[:per])}
+      format.json{render :json => @option_values.to_a.map{|x| {:name => x.name, :id => x.id}}}
+    end
   end
   
   def edit

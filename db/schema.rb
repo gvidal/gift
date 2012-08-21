@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120816124445) do
+ActiveRecord::Schema.define(:version => 20120821164153) do
 
   create_table "admin_users", :force => true do |t|
     t.string   "email"
@@ -43,8 +43,9 @@ ActiveRecord::Schema.define(:version => 20120816124445) do
     t.integer  "user_id"
     t.string   "provider"
     t.string   "uid"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "facebook_token_expires_at"
   end
 
   create_table "option_types", :force => true do |t|
@@ -146,12 +147,11 @@ ActiveRecord::Schema.define(:version => 20120816124445) do
   end
 
   create_table "variants", :force => true do |t|
-    t.string   "sku",                                                     :null => false
-    t.integer  "product_id",                                              :null => false
-    t.integer  "avaible",                                  :default => 0, :null => false
-    t.boolean  "is_master",                                               :null => false
-    t.datetime "created_at",                                              :null => false
-    t.datetime "updated_at",                                              :null => false
+    t.string   "sku",                                      :null => false
+    t.integer  "product_id",                               :null => false
+    t.boolean  "is_master",                                :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.decimal  "price",      :precision => 8, :scale => 2
     t.integer  "quantity"
   end

@@ -1,11 +1,16 @@
 class Variant < ActiveRecord::Base
   belongs_to :product
   has_many :wishlist_variant_votes, dependent: :destroy
-  has_many :wishlist, through: :wishlist_variants
+  has_many  :wishlist_variants, dependent: :destroy
+  has_many :wishlists, through: :wishlist_variants
+  has_many :option_value_variants
+  has_many :option_values, through: :option_value_variants
   
   validates :sku, presence: true, uniqueness: {scope: [:product_id, :is_master]}
   validates :price, presence: true, numericality: {greater_than: 0.0}
   validates :quantity, numericality: { only_integer: true, greater_than: 0 }
+  validates :option_value_ids, presence: true, if: lambda{|variant| !variant.is_master}
+  attr_reader :option_values_tokens
   
   scope :is_master, lambda{|value| where(:is_master => value)}
   scope :active, lambda{|value = true|
@@ -47,6 +52,9 @@ class Variant < ActiveRecord::Base
     else
       false
     end
+  end
+  def option_values_tokens=(values)
+    self.option_value_ids = self.class.ids_from_tokens(values)
   end
   
 end

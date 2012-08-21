@@ -3,7 +3,13 @@ class OptionValue < ActiveRecord::Base
   before_create :set_order
   acts_as_list scope: :option_type
   attr_reader :option_type_token
+  
   validates :name, :display,:option_type_id, presence: true
+  
+  scope :with_product_id, lambda{|value|
+    joins(option_type: :products).where(products: {id: value})
+  }
+  search_methods :with_product_id
 #  validates_existence_of :category 
   def option_type_token=(value)
     self.option_type_id = value.to_i

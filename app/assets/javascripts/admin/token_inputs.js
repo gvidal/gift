@@ -11,7 +11,7 @@ $(document).ready(function(){
                             tokenLimit: limit,
                             queryParam: selection.data('queryparam') || "tokens",
                             queryParamInside: selection.data('wrapparam') || "search",
-                            queryOtherMethods: selection.data('querymethods') || {},
+                            queryOtherMethods: selection.data('queryothermethods') || {},
                             onReady: function(){
                                 if(selection.attr("readonly") == "readonly"){
                                     selection.parent(".inputs").find(".token-input-delete-token-facebook").hide();

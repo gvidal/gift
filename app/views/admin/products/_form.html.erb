@@ -4,7 +4,6 @@
   <% end %>
   <div class="row">
     <%= f.label :name, f.object.class.human_attribute_name(:name) %>
-    
     <div class="inputs">
       <span class="input_wrapper"><%= f.text_field(:name, :class => "text") %></span>
     </div>
@@ -46,10 +45,10 @@
       </div>
     </div>
     <div class="row">
-      <%= master.label :avaible, master.object.class.human_attribute_name(:avaible) %>
+      <%= master.label :quantity, master.object.class.human_attribute_name(:quantity) %>
 
       <div class="inputs">
-        <span class="input_wrapper"><%= master.text_field(:avaible, :class => "text") %></span>
+        <span class="input_wrapper"><%= master.text_field(:quantity, :class => "text") %></span>
       </div>
     </div>
     <div class="row">
