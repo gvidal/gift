@@ -15,8 +15,7 @@ class WishlistsController < PublicController
   
   def update
     @wishlist = @current_user.own_wishlists.state("new").find(params[:id])
-    @friends = @graph.get_connections("me", "friends")
-    @registered_friends = User.with_facebook_uid(@friends.map{|x| x["id"]})
+    load_friends_and_registered_friends
     @friends_for_select = @wishlist.users.to_a.reject{|x| x == @current_user}
     if @wishlist.save
       flash[:notice] = t('public.wishlists.successfully_created')
@@ -30,15 +29,13 @@ class WishlistsController < PublicController
   def new
     @random_products = Product.are_active.offset(rand(Product.count)).order("RAND()").limit(4)
     @wishlist = @current_user.own_wishlists.new
-    @friends = @graph.get_connections("me", "friends")
-    @registered_friends = User.with_facebook_uid(@friends.map{|x| x["id"]})
+    load_friends_and_registered_friends
   end
   
   def create
     @random_products = Product.offset(rand(Product.count)).order("RAND()").limit(4)
-    @friends = @graph.get_connections("me", "friends")
     @wishlist = @current_user.own_wishlists.new(params[:wishlist])
-    @registered_friends = User.with_facebook_uid(@friends.map{|x| x["id"]})
+    load_friends_and_registered_friends
     if @wishlist.save
       redirect_to wishlists_url, flash: {notice: t('public.wishlists.successfully_created')}
     else
@@ -50,16 +47,16 @@ class WishlistsController < PublicController
   def vote
     vote = (params[:vote] == "true" || false)
     @wishlist = @current_user.active_wishlists.state("new").find(params[:id])
-    @variant = Variant.find(params[:variant_id])
-    @wishlist_variant_vote =  @wishlist.wishlist_variant_votes.find_by_variant_id_and_user_id(params[:variant_id], @current_user.id) || 
+    variant = Variant.find(params[:variant_id])
+    wishlist_variant_vote =  @wishlist.wishlist_variant_votes.find_by_variant_id_and_user_id(params[:variant_id], @current_user.id) || 
                               @wishlist.wishlist_variant_votes.new(:variant_id => params[:variant_id],
                                                                     :user_id => @current_user.id)
-    @wishlist_variant_vote.vote = vote
-    @wishlist_variant_vote.save
+    wishlist_variant_vote.vote = vote
+    wishlist_variant_vote.save
     
     respond_to do |format|
-      format.js{ render :json => {vote_ok: t('public.wishlists.show.votes', votes: @variant.num_votes(@wishlist, true)), 
-                                  vote_ko: t('public.wishlists.show.votes', votes: @variant.num_votes(@wishlist, false))}}
+      format.js{ render :json => {vote_ok: t('public.wishlists.show.votes', votes: variant.num_votes(@wishlist, true)), 
+                                  vote_ko: t('public.wishlists.show.votes', votes: variant.num_votes(@wishlist, false))}}
     end
   end
   
@@ -91,5 +88,14 @@ class WishlistsController < PublicController
       format.all{ render :nothing => true}
     end
   end
-  
+  private
+  def load_friends_and_registered_friends
+    @friends = @graph.get_connections("me", "friends")
+      registered_friends = User.with_facebook_uid(@friends.map{|x| x["id"]}).to_a
+      @friends.map! do |friend|
+        friend["db_id"] = registered_friends.select{|rf| rf.fb_authentication.uid.to_s == friend["id"]}.first.id
+        friend
+      end
+      @registered_friends = @friends.select{|u| u["db_id"].present?}
+  end
 end

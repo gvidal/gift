@@ -8,7 +8,7 @@
 </p>
 <p>
   <%= f.select :user_ids, 
-                @registered_friends.map{|friend|[friend.graph_api.get_object("me")["name"], friend.id]},
+                @registered_friends.map{|friend|[friend["name"], friend["db_id"]]},
                 { :prompt => "Please select",:include_blank => ""},
                 { :multiple => true } %>
   <%= f.label :user_ids,content_tag(:small, Wishlist.human_attribute_name(:users)) %>

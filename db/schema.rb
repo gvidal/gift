@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120821164153) do
+ActiveRecord::Schema.define(:version => 20120905165609) do
 
   create_table "admin_users", :force => true do |t|
     t.string   "email"
@@ -144,6 +144,8 @@ ActiveRecord::Schema.define(:version => 20120821164153) do
     t.datetime "updated_at",         :null => false
     t.string   "facebook_email"
     t.string   "stripe_costumer_id"
+    t.datetime "fb_expires_at"
+    t.string   "fb_name"
   end
 
   create_table "variants", :force => true do |t|

@@ -3,7 +3,7 @@
     <ul>
       <% @products.each do |product| -%>
         <li>
-          <h2 class="title"><%= image_tag product.master.first_image.url(:thumb)  %>
+          <h2 class="title"><%= image_tag product.master.first_image.url  %>
             <%= product.name %> 
           </h2>
           <p><%= product.description %></p>

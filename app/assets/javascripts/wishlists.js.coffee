@@ -2,7 +2,7 @@ $ ->
   $("#wishlist_gift_receiver_facebook_id").select2()
   $("#wishlist_user_ids").select2()
   $(".wishlist-link-to > a.pay").prepend('<img src="/assets/money2.png" style="width: 20px;height: 20px;" />')
-  $(".wishlist-link-to > a.public-edit-action").prepend('<img src="/assets/edit_action.gif" style="width: 20px;height: 20px;" />')
+#  $(".wishlist-link-to > a.public-edit-action").prepend('<img src="/assets/edit_action.gif" style="width: 20px;height: 20px;" />')
   new VoteVariant
   $("#wishlist-start-payment").click ()->
     $("li.wishlist-select-item").show()

@@ -10,14 +10,14 @@ class AuthenticationsController < PublicController
     session["uid"] = omniauth["uid"] 
     session["provider"] = omniauth["provider"]
     if authentication
-      authentication.user.set_current_token(omniauth)
-      authentication.save
+      user = authentication.user
+      user.set_current_token(omniauth, params)
+#      user.save!
       redirect_to (request.referer.blank? ? root_url : :back), :notice => "Logged in successfully"
     else  
       user = User.new
-      user.set_current_token(omniauth)
       user.apply_omniauth(omniauth)
-      if user.save
+      if user.set_current_token(omniauth, params)
         redirect_to (request.referer.blank? ? root_url : :back), :notice => "Logged in successfully"
       else  
         redirect_to (request.referer.blank? ? root_url : :back), :error => "Logged in error"

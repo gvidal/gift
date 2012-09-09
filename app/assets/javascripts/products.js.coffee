@@ -1,6 +1,6 @@
 #http://www.queness.com/resources/html/jcarousel/index.html
 $ ->
-  $(".tinycarousel").tinycarousel();
+  $($(".tinycarousel").first()).tinycarousel()
   new ProductsAddToWishlist
   
 class ProductsAddToWishlist

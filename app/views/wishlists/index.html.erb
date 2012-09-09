@@ -19,13 +19,13 @@
               <%= wishlist.description %>
             </li>
             <% if wishlist.state == "paying" -%>
-            <li class="wishlist-link-to">
-              <%= link_to t('public.wishlists.index.pay'), pay_payment_url(wishlist.get_payment(@current_user)), :class => "pay" %>
-            </li>
+              <li class="wishlist-link-to">
+                <%= link_to t('public.wishlists.index.pay'), pay_payment_url(wishlist.get_payment(@current_user)), :class => "pay" %>
+              </li>
             <% elsif is_wishlist_admin?(@current_user, wishlist) && wishlist.state == "new" -%>
-            <li class="wishlist-link-to">
-              <%= link_to t('public.wishlists.index.edit'), edit_wishlist_url(wishlist), :class => "public-edit-action" %>
-            </li>
+              <li class="wishlist-link-to">
+                <%= link_to t('public.wishlists.index.edit'), edit_wishlist_url(wishlist), :class => "public-edit-action" %>
+              </li>
             <% end -%>
           </ul>
         </li>

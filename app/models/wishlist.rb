@@ -61,7 +61,6 @@ class Wishlist < ActiveRecord::Base
   def create_payment_summary!(users, variant_ids_with_quantity)
     payment_summary_aux = PaymentSummary.new
     Variant.transaction do
-      
       variants = Variant.ids_in(variant_ids_with_quantity.map{|x|x[:variant_id]}).to_a
       variants_ids = variants.map(&:id)
       variants_with_quantity = variant_ids_with_quantity.dup

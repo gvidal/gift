@@ -38,7 +38,7 @@ class Variant < ActiveRecord::Base
   end
   
   def num_votes(wishlist, true_or_false)
-    self.wishlist_variant_votes.where(wishlist_id: wishlist.id, vote: true_or_false).count
+    self.wishlist_variant_votes.where(wishlist_id: wishlist.id, vote: !!true_or_false).count
   end
   
   def can_be_bought? number_of_units
@@ -57,4 +57,13 @@ class Variant < ActiveRecord::Base
     self.option_value_ids = self.class.ids_from_tokens(values)
   end
   
+  def parsed_option_values_message_to_display
+    string_to_return = ""
+    self.option_values.group_by(&:option_type).each_pair do |option_type, option_values|
+      string_to_return << "#{option_type.name.pluralize}: "
+      string_to_return << option_values.map(&:name).join(" ")
+      string_to_return << ". "
+    end
+    string_to_return
+  end
 end

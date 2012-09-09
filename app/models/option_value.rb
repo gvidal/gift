@@ -15,6 +15,10 @@ class OptionValue < ActiveRecord::Base
     self.option_type_id = value.to_i
   end
   
+  def with_option_string
+    
+  end
+  
   private
   def set_order
     self.position = self.class.where(option_type_id: self.option_type_id).order("position DESC").first.try(:position) || 0

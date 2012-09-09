@@ -4,11 +4,10 @@ class AdminUser < ActiveRecord::Base
   validates :email, :uniqueness => true, :format => {:with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i}
   validates_attachment_presence :avatar
   validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/png']
-  validates :name, :presence => true
-  validates :surname, :presence => true
+  validates :name, :surname, :presence => true
   validates :password, :presence =>  true,
-                     :length => { :minimum => 6 },
-                     :if => lambda{|admin_user| admin_user.new_record? || admin_user.password.present?}
+                       :length => { :minimum => 6 },
+                       :if => lambda{|admin_user| admin_user.new_record? || admin_user.password.present?}
 #  validate :check_password_confirmation
   
   def password_confirmation=(password_confirmation)

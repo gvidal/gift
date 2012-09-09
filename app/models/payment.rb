@@ -59,7 +59,6 @@ class Payment < ActiveRecord::Base
     payed = self.class.payment_summary(self.payment_summary_id).exclude_id(self.id)
     total = self.class.payment_summary(self.payment_summary_id).exclude_id(self.id).state("payed")
     if payed.count == total.count
-      require 'ruby-debug';debugger;1
       wishlist = self.payment_summary.wishlist
       wishlist.state("payed")
       wishlist.save!

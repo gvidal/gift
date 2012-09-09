@@ -39,10 +39,15 @@ class User < ActiveRecord::Base
                           :user => self)  
   end
   
-  def set_current_token(omniauth)
+  def set_current_token(omniauth, params)
+#    require 'ruby-debug';debugger;1
     if omniauth["provider"] == "facebook"
       self.current_token = omniauth["credentials"]["token"]
+      self.fb_expires_at = Time.at(omniauth["credentials"]["expires_at"])
+      self.fb_name = omniauth["info"]["name"] 
     end
+#    self.current_token = omniauth
+    self.save!
   end
   
   def set_birth_date
@@ -57,11 +62,11 @@ class User < ActiveRecord::Base
     self.graph_api.get_picture(self.fb_authentication.uid)
   end
   
-  def token_expired?(new_time = nil)
-    expiry = (new_time.nil? ? token_expires_at : Time.at(new_time))
+  def fb_token_expired?(new_time = nil)
+    expiry = (new_time.nil? ? self.fb_expires_at : Time.at(new_time))
     return true if expiry < Time.now ## expired token, so we should quickly return
-    token_expires_at = expiry
-    save if changed?
+    self.fb_expires_at = expiry
+    save if self.fb_expires_at_changed?
     false # token not expired. :D
   end
   

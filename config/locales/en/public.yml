@@ -5,6 +5,7 @@ en:
       one_variant_must_be_selected: "At least one product must be selected!"
       successfully_created: "Wishlist successfully created"
       index:
+        edit: "Edit"
         title: "My Gifts"
         pay: "Pay!"
       show:

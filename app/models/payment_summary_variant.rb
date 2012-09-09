@@ -5,7 +5,7 @@ class PaymentSummaryVariant < ActiveRecord::Base
   validates :price, numericality:{greater_than: 0.0}
   validates :quantity, numericality: {only_integer: true, greater_than: 0}
   validates :variant_id, :payment_summary_id, :price, :quantity, presence: true
-  validate :variant_can_be_bought
+  validate :variant_can_be_bought, :if => lambda{|payment_summary_variant| !payment_summary_variant.payment_summary.confirmed}
   
   before_save :set_price
   

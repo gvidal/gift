@@ -41,7 +41,7 @@ class Product < ActiveRecord::Base
     time = Time.zone.now.to_s(:default)
     if value
      products = self.where(:is_active => true)
-     products = products.where(arel_avaible_on.gteq(time).or(arel_avaible_on.eq(nil)))
+     products = products.where(arel_avaible_on.lteq(time).or(arel_avaible_on.eq(nil)))
      products = products.where(arel_expires_on.lteq(time).or(arel_expires_on.eq(nil)))
      products
     else
@@ -50,7 +50,10 @@ class Product < ActiveRecord::Base
   end
   
   def active_total_related_products
-    (self.related_products.are_active + self.inverse_of_related_products.are_active).uniq
+    related_products_arel = RelatedProduct.arel_table
+    products = self.class.includes([:inverse_of_related_products_association,:related_products_association])
+    products = products.where(related_products_arel[:related_product_id].eq(self.id).or(related_products_arel[:product_id].eq(self.id)))
+    products.are_active.uniq(true)
   end
   
   
